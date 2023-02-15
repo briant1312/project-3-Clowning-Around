@@ -27,11 +27,11 @@ MVP User Stories
 
 Wireframes
 -----------------
-![Clowing Around](images/CLOWING%20AROUND.png)
+![Clowing Around Wireframe](images/CLOWING%20AROUND.png)
 
 ERD Breakdown 
 ---------------------
-
+![Clowing Around ERD](images/Clowning%20around.png)
 
 Trello Board
 ----------------------
