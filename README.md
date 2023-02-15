@@ -42,7 +42,7 @@ As a user I want to change between dark and light theme
 
 Wireframes
 -----------------
-
+![Clowing Around](images/CLOWING%20AROUND.png)
 
 ERD Breakdown 
 ---------------------
