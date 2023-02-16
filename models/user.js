@@ -5,7 +5,7 @@ const Schema = mongoose.Schema
 const SALT_ROUNDS = 6
 
 const userSchema = new Schema({
-    name: {
+    username: {
         type: String,
         required: true
     },
