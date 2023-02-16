@@ -36,6 +36,9 @@ ERD Breakdown
 Trello Board
 ----------------------
 
+Check out our Trello Board describing the problems we hope to solve with our application [here](https://trello.com/invite/b/ytAofYvc/ATTI90ed1247b0b2349b4ef3d74a64cc27d56A731FBF/project-3). 
+
+
 
 Next Versions
 -------------
