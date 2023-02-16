@@ -5,6 +5,7 @@ import AuthPage from "../AuthPage/AuthPage";
 import NavBar from "../../components/NavBar";
 import { getUser } from "../../utilities/users-service"
 import HomePage from "../HomePage/HomePage";
+import ShowPage from "../ShowPage/ShowPage"
 
 function App() {
   const [user, setUser] = useState(getUser())
@@ -16,6 +17,7 @@ function App() {
           <NavBar setUser={setUser} user={user}/>
           <Routes>
             <Route path="/" element={<HomePage />} />
+            <Route path="/Create" element={<ShowPage />} />
           </Routes>
         </> 
         :
