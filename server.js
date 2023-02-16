@@ -25,6 +25,7 @@ app.use(express.static(path.join(__dirname, 'build')))
 
 app.use('/api/users', require('./routes/api/users'))
 app.use('/api/post', require('./routes/api/post'))
+app.use('/api/comment', require('./routes/api/comment'))
 
 app.get('/*', (req, res) => {
     res.sendFile(path.join(__dirname, 'build', 'index.html'))
