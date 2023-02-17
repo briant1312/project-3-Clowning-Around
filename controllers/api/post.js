@@ -44,8 +44,13 @@ async function addLike(req,res){
         post.save()
         res.json(post)
     }
+    else if(post.dislikes.includes(req.user._id)){
+        post.updateOne(post.dislikes.remove(req.user._id))
+        post.save()
+        res.json(post)
+    }
     else {
-        res.sendStatus(204)
+        res.json(post)
     }
 }
 
@@ -56,8 +61,13 @@ async function addDislike(req,res){
         post.save()
         res.json(post)
     }
+    else if(post.likes.includes(req.user._id)){
+        post.updateOne(post.likes.remove(req.user._id))
+        post.save()
+        res.json(post)
+    }
     else {
-        res.sendStatus(204)
+        res.json(post)
     }
 }
 
