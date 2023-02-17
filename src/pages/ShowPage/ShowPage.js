@@ -7,6 +7,7 @@ import CommentInput from '../../components/CommentInput/CommentInput'
 
 function ShowPage({user}) {
   const [post, setPost] = useState({})
+  const [comments, setComments] = useState([])
 
   const { postId } = useParams()
 
@@ -14,6 +15,7 @@ function ShowPage({user}) {
     async function getPost(postId) {
       const post = await postsAPI.show(postId)
       setPost(post)
+      setComments(post.comments)
     }
     getPost(postId)
   }, [])
@@ -21,8 +23,8 @@ function ShowPage({user}) {
   return (
     <>
     <Post user={user} post={post}/>
-    <CommentInput user={user} />
-    <CommentList comments={post.comments}/>
+    <CommentInput setComments={setComments} user={user} />
+    <CommentList setPost={setPost} setComments={setComments} user={user} comments={comments}/>
     </>
   )
 }

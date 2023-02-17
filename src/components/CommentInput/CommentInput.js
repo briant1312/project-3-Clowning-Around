@@ -3,7 +3,7 @@ import { useState } from 'react'
 import * as commentAPI from '../../utilities/comment-api'
 import { useParams } from 'react-router-dom'
 
-export default function CommentInput({user}) {
+export default function CommentInput({user, setComments}) {
     const [text, setText] = useState("")
     const {postId} = useParams()
 
@@ -13,7 +13,8 @@ export default function CommentInput({user}) {
 
     async function handleSubmit() {
         const newComment = {text, owner: user._id}
-        await commentAPI.createComment(postId, newComment)
+        const post = await commentAPI.createComment(postId, newComment)
+        setComments(post.comments)
         setText("")
     }
 
