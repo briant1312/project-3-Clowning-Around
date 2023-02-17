@@ -6,6 +6,7 @@ import NavBar from "../../components/NavBar";
 import { getUser } from "../../utilities/users-service"
 import HomePage from "../HomePage/HomePage";
 import ShowPage from "../ShowPage/ShowPage"
+import CreateForm from "../CreateForm/CreateForm";
 
 function App() {
   const [user, setUser] = useState(getUser())
@@ -18,6 +19,7 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/view/:postId" element={<ShowPage />} />
+            <Route path="/new/post" element={<CreateForm />} />
           </Routes>
         </> 
         :
