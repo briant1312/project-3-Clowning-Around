@@ -1,5 +1,12 @@
-export default function CommentList() {
+import Comments from "../Comments/Comments"
+
+export default function CommentList({comments}) {
     return (
-        <div>CommentList</div>
+        <div>{
+            comments && comments.map((comment, index) => (
+                <Comments comment={comment} key={index} />
+            ))
+        }</div>
+
     )
 }
