@@ -1,0 +1,12 @@
+import sendRequest from "./users-api";
+const BASE_URL = "api/post"
+
+export async function index() {
+    const posts = await sendRequest(BASE_URL)
+    return posts
+}
+
+export async function show(postId) {
+    const post = await sendRequest(`/${BASE_URL}/${postId}`)
+    return post
+}

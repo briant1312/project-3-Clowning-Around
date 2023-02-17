@@ -19,15 +19,13 @@ const postSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'User'
     }],
-    comments: [{
-        type: Schema.Types.ObjectId,
-        ref: 'Comment'
-    }],
+    comments: [commentSchema],
     owner: {
         type: Schema.Types.ObjectId,
         ref: 'User',
         required: true
     }
 })
+
 
 module.exports = mongoose.model('Post', postSchema)

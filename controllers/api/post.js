@@ -30,11 +30,19 @@ async function update(req, res) {
     res.json(post)
 }
 
+async function createComment(req, res){
+    const post = await Post.findById(req.params.id)
+    post.updateOne(comments.push(req.body))  
+    Post.save()
+    res.json(post)
+}
+
 
 module.exports = {
     create,
     show,
     index,
     deleteOne,
-    update
+    update,
+    createComment
 }

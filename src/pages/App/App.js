@@ -17,7 +17,7 @@ function App() {
           <NavBar setUser={setUser} user={user}/>
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/Create" element={<ShowPage />} />
+            <Route path="/view/:postId" element={<ShowPage />} />
           </Routes>
         </> 
         :

@@ -1,5 +1,7 @@
-export default function PostItem() {
+import { Link } from "react-router-dom"
+
+export default function PostItem({post}) {
     return (
-        <div>PostItem</div>
+        <Link to={`/view/${post._id}`}><div>{post.title}</div></Link>
     )
 }
