@@ -35,9 +35,34 @@ function update(req, res, next) {
         ) .catch(next)
 }
 
+async function addLike(req,res){
+    const post = await Post.findById(req.params.id)
+    if (!(post.comments.likes.includes(req.user._id))){
+        return
+    }
+    else {
+    post.updateOne(post.comments.likes.push(req.user._id))
+    post.save()
+    res.json(post)
+    }
+}
+
+async function addDislike(req,res){
+    const post = await Post.findById(req.params.id)
+    if (!(post.comments.dislikes.includes(req.user._id))){
+        return
+    }
+    else {
+    post.updateOne(post.comments.dislikes.push(req.user._id))
+    post.save()
+    res.json(post)
+    }
+}
 
 module.exports = {
     create,
     deleteOne,
-    update
+    update,
+    addLike,
+    addDislike
 }

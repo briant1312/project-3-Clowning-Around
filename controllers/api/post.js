@@ -1,5 +1,5 @@
 const Post = require('../../models/post')
-const user = require('../../models/user')
+const User = require('../../models/user')
 
 async function create(req, res){
     try {
@@ -37,6 +37,31 @@ async function createComment(req, res){
     res.json(post)
 }
 
+async function addLike(req,res){
+    const post = await Post.findById(req.params.id)
+    if (!(post.likes.includes(req.user._id))){
+        post.updateOne(post.likes.push(req.user._id))
+        post.save()
+        res.json(post)
+    }
+    else {
+        res.sendStatus(204)
+    }
+}
+
+async function addDislike(req,res){
+    const post = await Post.findById(req.params.id)
+    if (!(post.dislikes.includes(req.user._id))){
+        post.updateOne(post.dislikes.push(req.user._id))
+        post.save()
+        res.json(post)
+    }
+    else {
+        res.sendStatus(204)
+    }
+}
+
+
 
 module.exports = {
     create,
@@ -44,5 +69,7 @@ module.exports = {
     index,
     deleteOne,
     update,
-    createComment
+    createComment,
+    addLike,
+    addDislike
 }
