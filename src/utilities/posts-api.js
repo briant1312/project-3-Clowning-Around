@@ -15,3 +15,8 @@ export async function create(postData) {
     const post = await sendRequest(BASE_URL, 'POST', postData)
     return post
 }
+
+export async function deletePost(postId) {
+    await sendRequest(`${BASE_URL}/${postId}`, 'DELETE')
+    return
+}

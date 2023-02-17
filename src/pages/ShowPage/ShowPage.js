@@ -19,7 +19,7 @@ function ShowPage({user}) {
 
   return (
     <>
-    <Post post={post}/>
+    <Post user={user} post={post}/>
     <CommentList/>
     </>
   )
