@@ -1,23 +1,24 @@
-import { useState, useEffect } from "react"
-import { useParams } from "react-router"
-import * as postsAPI from "../../utilities/posts-api"
+import * as postsAPI from '../../utilities/posts-api'
+import { useNavigate } from 'react-router-dom'
 
-export default function Post() {
-  const [post, setPost] = useState({})
-  let { postId } = useParams()
+export default function Post({post, user}) {
+  const navigate = useNavigate()
 
-  useEffect(function() {
-    async function getPost(postId) {
-      const post = await postsAPI.show(postId)
-      setPost(post)
-    }
-    getPost(postId)
-  }, [])
+  async function handleDelete(postId) {
+    await postsAPI.deletePost(postId)
+    navigate('/')
+  }
+
+  function handleClick(postId) {
+    navigate(`/update/${postId}`)
+  }
 
   return (
     <div className="post">
       <h2>{post.title}</h2>
       <p>{post.text}</p>
+      {post.owner === user._id ? <button onClick={() => handleDelete(post._id)}>Delete</button> : null}
+      {post.owner === user._id ? <button onClick={() => handleClick(post._id)}>Update</button> : null}
     </div>
   )
 }
