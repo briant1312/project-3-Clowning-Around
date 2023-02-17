@@ -18,7 +18,7 @@ function App() {
           <NavBar setUser={setUser} user={user}/>
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/view/:postId" element={<ShowPage />} />
+            <Route path="/view/:postId" element={<ShowPage user={user}/>} />
             <Route path="/new/post" element={<CreateForm user={user} />} />
           </Routes>
         </> 

@@ -7,7 +7,7 @@ export async function index() {
 }
 
 export async function show(postId) {
-    const post = await sendRequest(`/${BASE_URL}/${postId}`)
+    const post = await sendRequest(`${BASE_URL}/${postId}`)
     return post
 }
 

@@ -1,10 +1,13 @@
 import React from 'react'
 import { useState } from 'react'
 import * as postsAPI from '../../utilities/posts-api'
+import { useNavigate } from "react-router-dom"
 
 export default function CreateForm({user}) {
     const [title, setTitle] = useState("")
     const [text, setText] = useState("")
+
+    const navigate = useNavigate()
 
     const handleTitleChange = (event) => {
         setTitle (event.target.value)
@@ -18,7 +21,7 @@ export default function CreateForm({user}) {
         event.preventDefault()
         const postData = {title, text, owner: user._id}
         const post = await postsAPI.create(postData)
-        console.log(post)
+        navigate('/')
     }
 
     return (
