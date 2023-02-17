@@ -19,7 +19,7 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/view/:postId" element={<ShowPage />} />
-            <Route path="/new/post" element={<CreateForm />} />
+            <Route path="/new/post" element={<CreateForm user={user} />} />
           </Routes>
         </> 
         :

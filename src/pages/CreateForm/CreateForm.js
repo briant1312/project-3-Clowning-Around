@@ -1,22 +1,29 @@
 import React from 'react'
 import { useState } from 'react'
+import * as postsAPI from '../../utilities/posts-api'
 
-export default function CreateForm() {
+export default function CreateForm({user}) {
     const [title, setTitle] = useState("")
     const [text, setText] = useState("")
 
     const handleTitleChange = (event) => {
         setTitle (event.target.value)
-
     }
 
     const handleTextChange = (event) => {
         setText (event.target.value)
     }
 
+    async function handleSubmit(event) {
+        event.preventDefault()
+        const postData = {title, text, owner: user._id}
+        const post = await postsAPI.create(postData)
+        console.log(post)
+    }
+
     return (
         <div className='create-container'>
-            <form>
+            <form onSubmit={handleSubmit}>
                 <label>Title</label>
                 <input
                     type='text'
