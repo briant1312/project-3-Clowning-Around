@@ -9,7 +9,7 @@ function create(req, res, next){
             post.comments.push(req.body)
             return post.save()
         })
-        .then(() => res.sendStatus(204)
+        .then((post) => res.json(post)
         ) .catch(next)
 }
 
