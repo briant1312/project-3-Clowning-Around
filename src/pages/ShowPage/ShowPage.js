@@ -3,6 +3,7 @@ import Post from '../../components/Post/Post'
 import CommentList from '../../components/CommentList/CommentList'
 import { useParams } from 'react-router-dom'
 import * as postsAPI from "../../utilities/posts-api"
+import CommentInput from '../../components/CommentInput/CommentInput'
 
 function ShowPage({user}) {
   const [post, setPost] = useState({})
@@ -20,7 +21,8 @@ function ShowPage({user}) {
   return (
     <>
     <Post user={user} post={post}/>
-    <CommentList/>
+    <CommentInput user={user} />
+    <CommentList comments={post.comments}/>
     </>
   )
 }
