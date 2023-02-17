@@ -7,6 +7,7 @@ import { getUser } from "../../utilities/users-service"
 import HomePage from "../HomePage/HomePage";
 import ShowPage from "../ShowPage/ShowPage"
 import CreateForm from "../CreateForm/CreateForm";
+import UpdateForm from "../UpdateForm/UpdateForm";
 
 function App() {
   const [user, setUser] = useState(getUser())
@@ -20,6 +21,7 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/view/:postId" element={<ShowPage user={user}/>} />
             <Route path="/new/post" element={<CreateForm user={user} />} />
+            <Route path="/update/:postId" element={<UpdateForm user={user} />} />
           </Routes>
         </> 
         :

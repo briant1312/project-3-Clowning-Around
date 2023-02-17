@@ -9,11 +9,16 @@ export default function Post({post, user}) {
     navigate('/')
   }
 
+  function handleClick(postId) {
+    navigate(`/update/${postId}`)
+  }
+
   return (
     <div className="post">
       <h2>{post.title}</h2>
       <p>{post.text}</p>
       {post.owner === user._id ? <button onClick={() => handleDelete(post._id)}>Delete</button> : null}
+      {post.owner === user._id ? <button onClick={() => handleClick(post._id)}>Update</button> : null}
     </div>
   )
 }

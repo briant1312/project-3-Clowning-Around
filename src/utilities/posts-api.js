@@ -20,3 +20,8 @@ export async function deletePost(postId) {
     await sendRequest(`${BASE_URL}/${postId}`, 'DELETE')
     return
 }
+
+export async function update(postId, postData) {
+    const post = await sendRequest(`${BASE_URL}/${postId}`, 'PATCH', postData)
+    return post
+}
