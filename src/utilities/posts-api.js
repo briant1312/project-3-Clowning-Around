@@ -25,3 +25,13 @@ export async function update(postId, postData) {
     const post = await sendRequest(`${BASE_URL}/${postId}`, 'PATCH', postData)
     return post
 }
+
+export async function likePost(postId) {
+    const post = await sendRequest(`${BASE_URL}/likes/${postId}`, 'PATCH')
+    return post
+}
+
+export async function dislikePost(postId) {
+    const post = await sendRequest(`${BASE_URL}/dislikes/${postId}`, 'PATCH')
+    return post
+}

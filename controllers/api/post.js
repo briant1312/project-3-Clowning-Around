@@ -45,7 +45,7 @@ async function addLike(req,res){
         res.json(post)
     }
     else {
-        res.sendStatus(204)
+        res.json(post)
     }
 }
 
@@ -57,7 +57,7 @@ async function addDislike(req,res){
         res.json(post)
     }
     else {
-        res.sendStatus(204)
+        res.json(post)
     }
 }
 

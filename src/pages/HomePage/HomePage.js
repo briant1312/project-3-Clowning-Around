@@ -1,5 +1,4 @@
 import PostList from "../../components/PostList/PostList"
-import SideBar from "../../components/SideBar/SideBar"
 import { useState, useEffect } from "react"
 import * as postsAPI from "../../utilities/posts-api"
 
@@ -19,7 +18,6 @@ function HomePage() {
   return (
     <>
     <PostList posts={posts}/>
-    <SideBar/>
     </>
   )
 }
