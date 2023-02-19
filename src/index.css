@@ -34,9 +34,14 @@ body {
   sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: var(--tan-4);
   padding: 2vmin;
   height: 100vh;
+  font-family: 'Comfortaa', cursive;
+  /* background-color: rgba(0, 234, 255, 0.667); */
+  background-image: linear-gradient(rgba(255,255,255,.6),
+  rgba(255,255,255,.6)),
+  url("https://images.unsplash.com/photo-1517884885877-a46b0f5327db?ixlib=rb-4.0.3&ixid=MnwxM[…]G90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80");
+  background-size: cover;
 }
 
 code {
@@ -171,6 +176,7 @@ button[type="submit"] {
 
 .post-item {
   border: 2px solid black;
+  border-radius: 20px;
   padding: 10px;
   margin-bottom: 10px;
 }
@@ -188,6 +194,7 @@ button[type="submit"] {
 
 .comment-page {
   border: 2px solid black;
+  border-radius: 20px;
   padding: 10px;
   margin-bottom: 10px;
   width: 75vw;
@@ -210,4 +217,9 @@ a {
 
 h2 {
   background-color: white;
+  font-family: 'Fredoka One', cursive;
+}
+
+h1 {
+  font-family: 'Fredoka One', cursive;
 }
