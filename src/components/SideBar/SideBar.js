@@ -8,14 +8,32 @@ export default function SideBar({user, setUser}) {
         setUser(null)
     }
     return (
-        <>
-        <Link to = '/new/post'>Create New Post</Link>
-        &nbsp;&nbsp;
-        <Link to = '/'>Home</Link>
-        &nbsp;&nbsp;
-        <span>Welcome {user.name}</span>
-            &nbsp;&nbsp;
-        <Link to="" onClick={handleLogOut}>Log Out</Link>
-        </>
+        <div className="side-bar">    
+        <span>
+            Welcome, {user.name}
+        </span>
+  
+        <span>
+            <Link to = '/'>Home</Link>
+        </span>
+    
+        <span className="log-out">
+            <Link to="" onClick={handleLogOut}>Log Out</Link>
+        </span>
+
+        <span>
+            <Link to = '/new/post'>Create New Post</Link>
+        </span>
+
+        <h2> About</h2>
+        <p>
+            does this work
+        </p>
+
+        <h2> Rules </h2>
+        <p>
+            does this work
+        </p>
+        </div>
     )
 }

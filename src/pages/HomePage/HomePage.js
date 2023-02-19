@@ -16,9 +16,9 @@ function HomePage() {
 
 
   return (
-    <>
-    <PostList posts={posts}/>
-    </>
+    <div>
+    <PostList posts={posts} />
+    </div>
   )
 }
 

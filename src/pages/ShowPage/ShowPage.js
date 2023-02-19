@@ -34,7 +34,7 @@ async function dislikePost() {
 }
 
   return (
-    <>
+    <div className="show-page">
     <Post 
       likeTotal={likeTotal}
       user={user} 
@@ -44,7 +44,7 @@ async function dislikePost() {
     />
     <CommentInput setComments={setComments} user={user} />
     <CommentList setPost={setPost} setComments={setComments} user={user} comments={comments}/>
-    </>
+    </div>
   )
 }
 
