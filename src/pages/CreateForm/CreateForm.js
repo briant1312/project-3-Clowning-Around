@@ -3,6 +3,7 @@ import { useState } from 'react'
 import * as postsAPI from '../../utilities/posts-api'
 import { useNavigate } from "react-router-dom"
 
+
 export default function CreateForm({user}) {
     const [title, setTitle] = useState("")
     const [text, setText] = useState("")

@@ -2,7 +2,6 @@ import { useState } from "react"
 import { Routes, Route } from "react-router-dom"
 import './App.css';
 import AuthPage from "../AuthPage/AuthPage";
-import NavBar from "../../components/NavBar";
 import { getUser } from "../../utilities/users-service"
 import HomePage from "../HomePage/HomePage";
 import ShowPage from "../ShowPage/ShowPage"
@@ -15,6 +14,9 @@ function App() {
 
   return (
     <main className="App">
+      <div>
+      <h1>Clowing Around</h1>
+      </div>
       { user ?
         <>
           <SideBar setUser={setUser} user={user}/>

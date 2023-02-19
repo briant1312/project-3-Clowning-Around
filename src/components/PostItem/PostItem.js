@@ -16,11 +16,11 @@ export default function PostItem({post}) {
     }
 
     return (
-        <>
+        <div className="post-item">
             <Link to={`/view/${post._id}`}><div>{post.title}</div></Link>
             <button onClick={likePost}>Like</button>
                 {likeTotal}
             <button onClick={dislikePost}>Dislike</button>
-        </>
+        </div>
     )
 }

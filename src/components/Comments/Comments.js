@@ -31,7 +31,7 @@ async function handleDelete(commentId) {
 }
 
   return (
-    <div>
+    <div className="comment-page">
       {comment.text}
       {user._id === comment.owner ? <button onClick={() => handleDelete(comment._id)}>Delete</button> : null}
       <button onClick={likeComment}>like</button>{likeTotal}<button onClick={dislikeComment}>dislike</button>    
