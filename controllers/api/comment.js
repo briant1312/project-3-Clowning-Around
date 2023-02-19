@@ -42,7 +42,13 @@ function addLike(req,res,next){
             const comment = post.comments.id(req.body.id)
             if (!(comment.likes.includes(req.user._id))){
                 comment.likes.push(req.user._id)
-                return post.save()
+                post.save()
+                res.json(comment)
+            }
+            else if (comment.dislikes.includes(req.user._id)){
+                comment.dislikes.remove(req.user._id)
+                post.save()
+                res.json(comment)
             }
             else {
                 res.sendStatus(204)
@@ -57,7 +63,13 @@ function addDislike(req,res,next){
             const comment = post.comments.id(req.body.id)
             if (!(comment.dislikes.includes(req.user._id))){
                 comment.dislikes.push(req.user._id)
-                return post.save()
+                post.save()
+                res.json(comment)
+            }
+            else if (comment.likes.includes(req.user._id)){
+                comment.likes.remove(req.user._id)
+                post.save()
+                res.json(comment)
             }
             else {
                 res.sendStatus(204)
