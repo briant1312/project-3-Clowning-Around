@@ -8,7 +8,7 @@ export default function Comments({comment, user, setComments}) {
   const { postId } = useParams()
   const [likeTotal, setLikeTotal] = useState(comment.likes.length - comment.dislikes.length)
   const honk = new Audio("http://www.bubbasmonkey.com/COWS/bikehorn.wav")
-  console.log(comment.owner)
+  
 
 async function likeComment() {
     const updatedComment = await commentAPI.likeComment(postId,{id:comment._id})
