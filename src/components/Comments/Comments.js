@@ -7,6 +7,8 @@ import { useState } from 'react'
 export default function Comments({comment, user, setComments}) {
   const { postId } = useParams()
   const [likeTotal, setLikeTotal] = useState(comment.likes.length - comment.dislikes.length)
+  const honk = new Audio("http://www.bubbasmonkey.com/COWS/bikehorn.wav")
+
 
 async function likeComment() {
     const updatedComment = await commentAPI.likeComment(postId,{id:comment._id})
@@ -14,6 +16,8 @@ async function likeComment() {
         return
       }
     setLikeTotal(updatedComment.likes.length - updatedComment.dislikes.length)
+    honk.play()
+
 }
 
 async function dislikeComment() {
@@ -22,6 +26,7 @@ async function dislikeComment() {
       return
     }
     setLikeTotal(updatedComment.likes.length - updatedComment.dislikes.length)
+    honk.play()
 }
 
 async function handleDelete(commentId) {
