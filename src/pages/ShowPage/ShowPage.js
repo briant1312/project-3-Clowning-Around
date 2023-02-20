@@ -21,6 +21,7 @@ function ShowPage({user}) {
       setLikeTotal(post.likes.length - post.dislikes.length)
     }
     getPost(postId)
+    window.scrollTo(0, 0)
   }, [])
 
   async function likePost() {

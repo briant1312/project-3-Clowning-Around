@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom"
 export default function CreateForm({user}) {
     const [title, setTitle] = useState("")
     const [text, setText] = useState("")
+    window.scrollTo(0, 0)
 
     const navigate = useNavigate()
 

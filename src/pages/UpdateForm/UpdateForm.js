@@ -26,6 +26,7 @@ export default function UpdateForm() {
         setText(post.text)
       }
       getPost(postId)
+      window.scrollTo(0, 0)
     }, [])
 
     async function handleSubmit(event) {

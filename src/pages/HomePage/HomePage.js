@@ -12,6 +12,7 @@ function HomePage() {
             setPosts(posts)
         }
         getPosts()
+        window.scrollTo(0, 0)
     }, [])
 
 
