@@ -31,6 +31,7 @@ export default function PostItem({post}) {
             <button onClick={dislikePost}>🎈</button>
             </div>
             <p className="comment-count">Comments: {post.comments.length}</p>
+            <p className="post-owner">Posted By: {post.owner.name}</p>
         </div>
     )
 }

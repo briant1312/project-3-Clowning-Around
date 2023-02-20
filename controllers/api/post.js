@@ -11,12 +11,12 @@ async function create(req, res){
 }
 
 async function index(req, res) {
-	const posts = await Post.find({})
+	const posts = await Post.find({}).populate('owner')
     res.json(posts)
 }
 
 async function show(req, res) {
-	const post = await Post.findById(req.params.id)
+	const post = await Post.findById(req.params.id).populate('owner')
 	res.json(post)
 }
 

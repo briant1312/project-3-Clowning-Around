@@ -4,7 +4,7 @@ import { useState } from 'react'
 
 export default function Post({post, user, likePost, dislikePost, likeTotal}) {
   const navigate = useNavigate()
-
+  
   async function handleDelete(postId) {
     await postsAPI.deletePost(postId)
     navigate('/')
@@ -24,6 +24,7 @@ export default function Post({post, user, likePost, dislikePost, likeTotal}) {
       <button onClick={likePost}>💚</button>
        <span>{likeTotal}</span> 
       <button onClick={dislikePost}>🎈</button>
+      <p className='post-owner'>Posted By: {post.owner && post.owner.name}</p>
       </div>
     </div>
   )
