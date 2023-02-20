@@ -17,10 +17,14 @@ export default function PostItem({post}) {
 
     return (
         <div className="post-item">
-            <Link to={`/view/${post._id}`}><div>{post.title}</div></Link>
-            <button onClick={likePost}>Like</button>
-                {likeTotal}
-            <button onClick={dislikePost}>Dislike</button>
+            <Link to={`/view/${post._id}`}><span className="post-title">{post.title}</span></Link>
+            <p className="post-text">{post.text}</p>
+            <div className="likes-container">
+            <button onClick={likePost}>💚</button>
+               <span>{likeTotal}</span> 
+            <button onClick={dislikePost}>🎈</button>
+            </div>
+            <p className="comment-count">Comments: {post.comments.length}</p>
         </div>
     )
 }

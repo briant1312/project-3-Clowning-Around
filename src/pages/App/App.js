@@ -14,8 +14,8 @@ function App() {
 
   return (
     <main className="App">
-      <div>
-      <h1>Clowing Around</h1>
+      <div className="jumbotron">
+      <h1 className="display-4">Clowning Around</h1>
       </div>
       { user ?
         <>

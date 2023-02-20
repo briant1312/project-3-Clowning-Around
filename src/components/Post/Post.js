@@ -20,9 +20,11 @@ export default function Post({post, user, likePost, dislikePost, likeTotal}) {
       <p>{post.text}</p>
       {post.owner === user._id ? <button onClick={() => handleDelete(post._id)}>Delete</button> : null}
       {post.owner === user._id ? <button onClick={() => handleClick(post._id)}>Update</button> : null}
-      <button onClick={likePost}>Like</button>
-        {likeTotal}
-      <button onClick={dislikePost}>Dislike</button>
+      <div className="likes-container">
+      <button onClick={likePost}>💚</button>
+       <span>{likeTotal}</span> 
+      <button onClick={dislikePost}>🎈</button>
+      </div>
     </div>
   )
 }

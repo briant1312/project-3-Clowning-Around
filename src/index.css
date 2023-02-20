@@ -34,9 +34,14 @@ body {
   sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: var(--tan-4);
   padding: 2vmin;
   height: 100vh;
+  font-family: 'Comfortaa', cursive;
+  /* background-color: rgba(0, 234, 255, 0.667); */
+  background-image: linear-gradient(rgba(255,255,255,.6),
+  rgba(255,255,255,.6)),
+  url("https://images.unsplash.com/photo-1517884885877-a46b0f5327db?ixlib=rb-4.0.3&ixid=MnwxM[…]G90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80");
+  background-size: cover;
 }
 
 code {
@@ -171,26 +176,33 @@ button[type="submit"] {
 
 .post-item {
   border: 2px solid black;
+  border-radius: 20px;
   padding: 10px;
   margin-bottom: 10px;
+  position: relative;
+  padding-bottom: 50px;
 }
 
 .side-bar {
   display: flex;
   flex-direction: column;
   width: 20vw;
-  height: 90vh;
-  position: fixed;
+  /* height: 90vh; */
+  position: absolute;
   border: 2px solid black;
-  right: 0;
+  right: 10px;
   gap: 15px;
+  padding: 5px;
+  border-radius: 20px;
 }
 
 .comment-page {
   border: 2px solid black;
-  padding: 10px;
+  border-radius: 20px;
+  padding: 30px;
   margin-bottom: 10px;
   width: 75vw;
+  padding-bottom: 50px;
 }
 
 .show-page {
@@ -199,6 +211,39 @@ button[type="submit"] {
 
 .create-container {
   width: 75vw;
+}
+
+.likes-container {
+  position: absolute;
+}
+
+.likes-container span {
+  margin: 10px;
+}
+
+.comment-count {
+  position: absolute;
+  right: 5px;
+}
+
+.post-text {
+  max-width: 75ch;
+  margin: 0 auto;
+  line-height: 1.5;
+}
+
+.post-title {
+  display: block;
+  margin: 10px;
+}
+
+.post {
+  position: relative;
+  padding: 30px;
+  border: 2px solid black;
+  padding-bottom: 50px;
+  border-radius: 20px;
+  margin-bottom: 20px;
 }
 
 .log-out {
@@ -210,4 +255,9 @@ a {
 
 h2 {
   background-color: white;
+  font-family: 'Fredoka One', cursive;
+}
+
+h1 {
+  font-family: 'Fredoka One', cursive;
 }
