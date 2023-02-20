@@ -24,8 +24,9 @@ export default function CommentInput({user, setComments}) {
     value={text}
     placeholder='Enter Comment Here'
     onChange={handleChange}
+    className="new-comment-input"
     >{text}</textarea>
-    <button onClick={handleSubmit}>Submit</button>
+    <button className='new-comment-submit button' onClick={handleSubmit}>Submit</button>
     </>
   )
 }

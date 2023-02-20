@@ -18,14 +18,16 @@ export default function Post({post, user, likePost, dislikePost, likeTotal}) {
     <div className="post">
       <h2>{post.title}</h2>
       <p>{post.text}</p>
-      {post.owner === user._id ? <button onClick={() => handleDelete(post._id)}>Delete</button> : null}
-      {post.owner === user._id ? <button onClick={() => handleClick(post._id)}>Update</button> : null}
-      <div className="likes-container">
-      <button onClick={likePost}>💚</button>
-       <span>{likeTotal}</span> 
-      <button onClick={dislikePost}>🎈</button>
-      <p className='post-owner'>Posted By: {post.owner && post.owner.name}</p>
+      <div className="owner-button-container">
+        {post.owner && post.owner._id === user._id ? <button className='button' onClick={() => handleClick(post._id)}>Update</button> : null}
+        {post.owner && post.owner._id === user._id ? <button className='button' onClick={() => handleDelete(post._id)}>Delete</button> : null}
       </div>
+      <div className="likes-container">
+      <span className='like-button' onClick={likePost}>💚</span>
+       <span>{likeTotal}</span> 
+      <span className='dislike-button' onClick={dislikePost}>🎈</span>
+      </div>
+      <p className='post-owner'>Posted By: {post.owner && post.owner.name}</p>
     </div>
   )
 }

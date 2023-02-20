@@ -28,21 +28,21 @@ export default function CreateForm({user}) {
 
     return (
         <div className='create-container'>
-            <form onSubmit={handleSubmit}>
-                <label>Title</label>
+            <form className='create-post-form' onSubmit={handleSubmit}>
                 <input
                     type='text'
                     name='title'
                     value={title}
                     onChange={handleTitleChange}
+                    placeholder="Title"
                 ></input>
-                <label>Text</label>
                 <textarea
                     name='text'
                     value={text}
                     onChange={handleTextChange}
+                    placeholder="Text"
                 ></textarea>
-                <button type='submit'>Submit</button>
+                <button className='button' type='submit'>Submit</button>
             </form>
         </div>
     )

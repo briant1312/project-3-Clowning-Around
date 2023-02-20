@@ -8,7 +8,6 @@ export default function Comments({comment, user, setComments}) {
   const { postId } = useParams()
   const [likeTotal, setLikeTotal] = useState(comment.likes.length - comment.dislikes.length)
   const honk = new Audio("http://www.bubbasmonkey.com/COWS/bikehorn.wav")
-  console.log(comment.owner)
 
 async function likeComment() {
     const updatedComment = await commentAPI.likeComment(postId,{id:comment._id})
@@ -38,10 +37,10 @@ async function handleDelete(commentId) {
   return (
     <div className="comment-page">
       {comment.text}
-      {user._id === comment.owner ? <button onClick={() => handleDelete(comment._id)}>Delete</button> : null}
+      {user._id === comment.owner ? <button className='delete-comment button' onClick={() => handleDelete(comment._id)}>Delete</button> : null}
       <div className="likes-container">
-      <button onClick={likeComment}>💚</button><span>{likeTotal}</span><button onClick={dislikeComment}>🎈</button>
-      <p className='comment-owner'>Posted By: {comment.owner}</p>
+      <span className='like-button' onClick={likeComment}>💚</span><span>{likeTotal}</span><span className='dislike-button' onClick={dislikeComment}>🎈</span>
+      {/* <p className='comment-owner'>Posted By: {comment.owner}</p> */}
       </div>    
     </div>
   )
