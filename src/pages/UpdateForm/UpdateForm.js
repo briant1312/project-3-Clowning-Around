@@ -33,27 +33,24 @@ export default function UpdateForm() {
         event.preventDefault()
         const postData = {title, text}
         const updatedPost = await postsAPI.update(postId, postData)
-        console.log(updatedPost)
         navigate(`/view/${updatedPost._id}`)
     }
 
   return (
     <div className='create-container'>
-            <form onSubmit={handleSubmit}>
-                <label>Title</label>
+            <form className="update-post-form" onSubmit={handleSubmit}>
                 <input
                     type='text'
                     name='title'
                     value={title}
                     onChange={handleTitleChange}
                 ></input>
-                <label>Text</label>
                 <textarea
                     name='text'
                     value={text}
                     onChange={handleTextChange}
                 ></textarea>
-                <button type='submit'>Submit</button>
+                <button className="button" type='submit'>Submit</button>
             </form>
         </div>
   )
