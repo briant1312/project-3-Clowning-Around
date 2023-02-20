@@ -21,6 +21,7 @@ code {
   --orange: #F67F00;
   --text-light: #968c84;
   --text-dark: #615954;
+  --container-padding: 75px;
 }
 
 *, *:before, *:after {
@@ -98,8 +99,8 @@ code {
 
 .form-container {
   padding: 3vmin;
-  background-color: var(--tan-1);
   border: .1vmin solid var(--tan-3);
+  background-color: rgba(255,255,255,.8);
   border-radius: 1vmin;
 }
 
@@ -180,29 +181,63 @@ button[type="submit"] {
   padding: 10px;
   margin-bottom: 10px;
   position: relative;
-  padding-bottom: 50px;
+  padding-bottom: var(--container-padding);
+  cursor: pointer;
+  background-color: rgba(255,255,255,.8);
+}
+
+.post-owner {
+  position: absolute;
+  right: 5px;
+  bottom: -10px;
+  color: #615954;
+}
+
+.post-title {
+  font-size: 27px;
+  font-weight: 700;
+}
+
+.post-text {
+  font-size: 18px;
+}
+
+.like-button {
+  font-size: 24px;
+}
+
+.dislike-button {
+  font-size: 24px;
 }
 
 .side-bar {
   display: flex;
   flex-direction: column;
   width: 20vw;
-  /* height: 90vh; */
   position: absolute;
   border: 2px solid black;
   right: 10px;
   gap: 15px;
   padding: 5px;
   border-radius: 20px;
+  background-color:rgba(255,255,255,.8);
 }
 
 .comment-page {
+  position: relative;
   border: 2px solid black;
   border-radius: 20px;
   padding: 30px;
   margin-bottom: 10px;
   width: 75vw;
-  padding-bottom: 50px;
+  padding-bottom: var(--container-padding);
+  background-color: rgba(255,255,255,.8);
+}
+
+.delete-comment {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
 }
 
 .show-page {
@@ -215,15 +250,18 @@ button[type="submit"] {
 
 .likes-container {
   position: absolute;
+  bottom: 15px;
+  left: 15px;
 }
 
 .likes-container span {
-  margin: 10px;
+  margin: 5px;
 }
 
 .comment-count {
   position: absolute;
   right: 5px;
+  bottom: 15px;
 }
 
 .post-text {
@@ -241,20 +279,91 @@ button[type="submit"] {
   position: relative;
   padding: 30px;
   border: 2px solid black;
-  padding-bottom: 50px;
+  padding-bottom: var(--container-padding);
   border-radius: 20px;
   margin-bottom: 20px;
+  background-color: rgba(255,255,255,.8);
 }
 
-.log-out {
-  
+.new-comment-input {
+  width: 70vw;
+  height: 10vh;
 }
+
+.new-comment-submit {
+  margin-bottom: 25px;
+}
+
+.create-post-form,
+.update-post-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: var(--container-padding);
+}
+
+.create-post-form input,
+.update-post-form input {
+  width: 70vw;
+}
+
+.create-post-form textarea,
+.update-post-form textarea {
+  width: 70vw;
+  height: 10vh;
+}
+
+.owner-button-container {
+  position: absolute;
+  right: 10px;
+  bottom: 40px;
+}
+
+.button {
+  align-self: center;
+  background-color: #fff;
+  background-image: none;
+  background-position: 0 90%;
+  background-repeat: repeat no-repeat;
+  background-size: 4px 3px;
+  border-radius: 15px 225px 255px 15px 15px 255px 225px 15px;
+  border-style: solid;
+  border-width: 2px;
+  box-shadow: rgba(0, 0, 0, .2) 15px 28px 25px -18px;
+  box-sizing: border-box;
+  color: #41403e;
+  cursor: pointer;
+  display: inline-block;
+  font-family: Neucha, sans-serif;
+  font-size: 1rem;
+  line-height: 12px;
+  outline: none;
+  padding: .75rem;
+  text-decoration: none;
+  transition: all 235ms ease-in-out;
+  border-bottom-left-radius: 15px 255px;
+  border-bottom-right-radius: 225px 15px;
+  border-top-left-radius: 255px 15px;
+  border-top-right-radius: 15px 225px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button:hover {
+  box-shadow: rgba(0, 0, 0, .3) 2px 8px 8px -5px;
+  transform: translate3d(0, 2px, 0);
+}
+
+.button:focus {
+  box-shadow: rgba(0, 0, 0, .3) 2px 8px 4px -6px;
+}
+
 a {
   color: red;
 }
 
 h2 {
-  background-color: white;
   font-family: 'Fredoka One', cursive;
 }
 

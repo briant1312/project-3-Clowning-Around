@@ -9,6 +9,7 @@ function ShowPage({user}) {
   const [post, setPost] = useState({})
   const [comments, setComments] = useState([])
   const [likeTotal, setLikeTotal] = useState(0 && post.likes.length - post.dislikes.length)
+  const honk = new Audio("http://www.bubbasmonkey.com/COWS/bikehorn.wav")
 
 
   const { postId } = useParams()
@@ -27,11 +28,13 @@ function ShowPage({user}) {
   async function likePost() {
     const updatedPost = await postsAPI.likePost(post._id)
     setLikeTotal(updatedPost.likes.length - updatedPost.dislikes.length)
+    honk.play()
 }
 
 async function dislikePost() {
     const updatedPost = await postsAPI.dislikePost(post._id)
     setLikeTotal(updatedPost.likes.length - updatedPost.dislikes.length)
+    honk.play()
 }
 
   return (
@@ -44,6 +47,7 @@ async function dislikePost() {
       dislikePost={dislikePost}
     />
     <CommentInput setComments={setComments} user={user} />
+    <h3>Comments</h3>
     <CommentList setPost={setPost} setComments={setComments} user={user} comments={comments}/>
     </div>
   )
