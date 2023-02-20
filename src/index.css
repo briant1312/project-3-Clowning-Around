@@ -204,10 +204,12 @@ button[type="submit"] {
 
 .like-button {
   font-size: 24px;
+  cursor: pointer;
 }
 
 .dislike-button {
   font-size: 24px;
+  cursor: pointer;
 }
 
 .side-bar {
