@@ -8,8 +8,12 @@ function HomePage() {
 
     useEffect(function() {
         async function getPosts(){
-            const posts = await postsAPI.index()
-            setPosts(posts)
+            try {
+              const posts = await postsAPI.index()
+              setPosts(posts)
+            } catch(err) {
+              console.error(err)
+            }
         }
         getPosts()
         window.scrollTo(0, 0)

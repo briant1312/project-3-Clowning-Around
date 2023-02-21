@@ -1,12 +1,16 @@
 import * as usersAPI from "./users-api"
 
 export async function signUp(userData) {
-    const token = await usersAPI.signUp(userData)
+    try {
+        const token = await usersAPI.signUp(userData)
 
-    // for right now, thos won't be a token but we will be 
-    // returning one eventually
-    localStorage.setItem('token', token)
-    return getUser()
+        // for right now, thos won't be a token but we will be 
+        // returning one eventually
+        localStorage.setItem('token', token)
+        return getUser()
+    } catch(err) {
+        console.error(err)
+    }
 }
 
 export function getToken() {
@@ -54,12 +58,17 @@ export function logOut() {
 }
 
 export async function logIn(credentials) {
-    const token = await usersAPI.logIn(credentials)
-    localStorage.setItem('token', token)
-    return getUser()
+    try {
+        const token = await usersAPI.logIn(credentials)
+        localStorage.setItem('token', token)
+        return getUser()
+    } catch(err) {
+        console.error(err)
+    }
 }
 
 export function checkToken() {
     return usersAPI.checkToken()
         .then(dateStr => new Date(dateStr))
+        .catch(console.error)
 }

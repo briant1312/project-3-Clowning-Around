@@ -13,17 +13,25 @@ export default function PostItem({post}) {
   
 
     async function likePost(event) {
-        event.stopPropagation()
-        const updatedPost = await postsAPI.likePost(post._id)
-        setLikeTotal(updatedPost.likes.length - updatedPost.dislikes.length)
-        honk.play()
+        try {
+            event.stopPropagation()
+            const updatedPost = await postsAPI.likePost(post._id)
+            setLikeTotal(updatedPost.likes.length - updatedPost.dislikes.length)
+            honk.play()
+        } catch(err) {
+            console.error(err)
+        }
     }
 
     async function dislikePost(event) {
-        event.stopPropagation()
-        const updatedPost = await postsAPI.dislikePost(post._id)
-        setLikeTotal(updatedPost.likes.length - updatedPost.dislikes.length)
-        sadhonk.play()
+        try {
+            event.stopPropagation()
+            const updatedPost = await postsAPI.dislikePost(post._id)
+            setLikeTotal(updatedPost.likes.length - updatedPost.dislikes.length)
+            sadhonk.play()
+        } catch(err) {
+            console.error(err)
+        }
     }
 
     function navigateToShow() {

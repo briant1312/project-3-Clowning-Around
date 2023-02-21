@@ -2,36 +2,64 @@ import sendRequest from "./users-api";
 const BASE_URL = "/api/post"
 
 export async function index() {
-    const posts = await sendRequest(BASE_URL)
-    return posts
+    try {
+        const posts = await sendRequest(BASE_URL)
+        return posts
+    } catch(err) {
+        console.error(err)
+    }
 }
 
 export async function show(postId) {
-    const post = await sendRequest(`${BASE_URL}/${postId}`)
-    return post
+    try {
+        const post = await sendRequest(`${BASE_URL}/${postId}`)
+        return post
+    } catch(err) {
+        console.error(err)
+    }
 }
 
 export async function create(postData) {
-    const post = await sendRequest(BASE_URL, 'POST', postData)
-    return post
+    try {
+        const post = await sendRequest(BASE_URL, 'POST', postData)
+        return post
+    } catch(err) {
+        console.error(err)
+    }
 }
 
 export async function deletePost(postId) {
-    await sendRequest(`${BASE_URL}/${postId}`, 'DELETE')
-    return
+    try {
+        await sendRequest(`${BASE_URL}/${postId}`, 'DELETE')
+        return
+    } catch(err) {
+        console.error(err)
+    }
 }
 
 export async function update(postId, postData) {
-    const post = await sendRequest(`${BASE_URL}/${postId}`, 'PATCH', postData)
-    return post
+    try {
+        const post = await sendRequest(`${BASE_URL}/${postId}`, 'PATCH', postData)
+        return post
+    } catch(err) {
+        console.error(err)
+    }
 }
 
 export async function likePost(postId) {
-    const post = await sendRequest(`${BASE_URL}/likes/${postId}`, 'PATCH')
-    return post
+    try {
+        const post = await sendRequest(`${BASE_URL}/likes/${postId}`, 'PATCH')
+        return post
+    } catch(err) {
+        console.error(err)
+    }
 }
 
 export async function dislikePost(postId) {
-    const post = await sendRequest(`${BASE_URL}/dislikes/${postId}`, 'PATCH')
-    return post
+    try {
+        const post = await sendRequest(`${BASE_URL}/dislikes/${postId}`, 'PATCH')
+        return post
+    } catch(err) {
+        console.error(err)
+    }
 }

@@ -20,10 +20,14 @@ export default function CreateForm({user}) {
     }
 
     async function handleSubmit(event) {
-        event.preventDefault()
-        const postData = {title, text, owner: user._id}
-        await postsAPI.create(postData)
-        navigate('/')
+        try {
+            event.preventDefault()
+            const postData = {title, text, owner: user._id}
+            await postsAPI.create(postData)
+            navigate('/')
+        } catch(err) {
+            console.error(err)
+        }
     }
 
     return (

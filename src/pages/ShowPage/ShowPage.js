@@ -20,25 +20,37 @@ function ShowPage({user}) {
 
   useEffect(function() {
     async function getPost(postId) {
-      const post = await postsAPI.show(postId)
-      setPost(post)
-      setComments(post.comments)
-      setLikeTotal(post.likes.length - post.dislikes.length)
+      try {
+        const post = await postsAPI.show(postId)
+        setPost(post)
+        setComments(post.comments)
+        setLikeTotal(post.likes.length - post.dislikes.length)
+      } catch(err) {
+        console.error(err)
+      }
     }
     getPost(postId)
     window.scrollTo(0, 0)
   }, [postId])
 
   async function likePost() {
-    const updatedPost = await postsAPI.likePost(post._id)
-    setLikeTotal(updatedPost.likes.length - updatedPost.dislikes.length)
-    honk.play()
+    try {
+      const updatedPost = await postsAPI.likePost(post._id)
+      setLikeTotal(updatedPost.likes.length - updatedPost.dislikes.length)
+      honk.play()
+    } catch(err) {
+      console.error(err)
+    }
 }
 
 async function dislikePost() {
-    const updatedPost = await postsAPI.dislikePost(post._id)
-    setLikeTotal(updatedPost.likes.length - updatedPost.dislikes.length)
-    sadhonk.play()
+    try {
+      const updatedPost = await postsAPI.dislikePost(post._id)
+      setLikeTotal(updatedPost.likes.length - updatedPost.dislikes.length)
+      sadhonk.play()
+    } catch(err) {
+      console.error(err)
+    }
 }
 
 function handleClick() {
