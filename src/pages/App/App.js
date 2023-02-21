@@ -15,7 +15,23 @@ function App() {
   return (
     <main className="App">
       <div className="jumbotron">
-      <h1 className="display-4">Clowning Around</h1>
+      <h1 className="display-4">
+        <span style={{color: 'blue'}}>C</span>
+        <span style={{color: 'red'}}>l</span>
+        <span style={{color: 'green'}}>o</span>
+        <span style={{color: 'yellow'}}>w</span>
+        <span style={{color: 'violet'}}>n</span>
+        <span style={{color: 'cyan'}}>i</span>
+        <span style={{color: 'pink'}}>n</span>
+        <span style={{color: 'purple'}}>g</span>
+          &nbsp;
+        <span style={{color: 'blue'}}>A</span>
+        <span style={{color: 'red'}}>r</span>
+        <span style={{color: 'green'}}>o</span>
+        <span style={{color: 'yellow'}}>u</span>
+        <span style={{color: 'violet'}}>n</span>
+        <span style={{color: 'cyan'}}>d</span>
+      </h1>
       </div>
       { user ?
         <>

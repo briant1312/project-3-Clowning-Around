@@ -236,6 +236,10 @@ button[type="submit"] {
   background-color: rgba(255,255,255,.8);
 }
 
+.comment-page .likes-container {
+  bottom: 0;
+}
+
 .delete-comment {
   position: absolute;
   right: 10px;
@@ -275,6 +279,10 @@ button[type="submit"] {
 .post-title {
   display: block;
   margin: 10px;
+}
+
+.display-4 span{
+  -webkit-text-stroke: 2px black;
 }
 
 .post {
