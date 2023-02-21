@@ -1,8 +1,8 @@
 Project 3 - Clowning Around
 ==============================
 
-This is the planning documentation for Slow to React's project 3.  
-The list below will include the necessities for successfully creating our project. 
+This is the README documentation for Slow to React's project 3.  
+We saw a desperate need for the clown community to get together and share knowledge without prejudice. Thus Clowning Around was born. So please stop by and hang out. You might just learn a new joke. 
 
 1. Screenshots
 2. MVP User Stories
