@@ -1,5 +1,5 @@
 import sendRequest from "./users-api";
-const BASE_URL = "/api/post"
+const BASE_URL = "https://clowning-around-server.onrender.com/api/post"
 
 export async function index() {
     try {

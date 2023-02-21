@@ -1,5 +1,5 @@
 import { getToken } from "./users-service"
-const BASE_URL = "/api/users"
+const BASE_URL = "https://clowning-around-server.onrender.com/api/users"
 
 export async function signUp(userData) {
     try {
