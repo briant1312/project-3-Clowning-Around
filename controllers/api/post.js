@@ -16,7 +16,10 @@ async function index(req, res) {
 }
 
 async function show(req, res) {
-	const post = await Post.findById(req.params.id).populate('owner')
+	const post = await Post.findById(req.params.id).populate({
+        path: 'comments',
+        populate: {path: 'owner'}
+    }).populate('owner')
 	res.json(post)
 }
 

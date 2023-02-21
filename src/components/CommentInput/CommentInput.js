@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
 import * as commentAPI from '../../utilities/comment-api'
+import * as postAPI from '../../utilities/posts-api'
 import { useParams } from 'react-router-dom'
 
 export default function CommentInput({user, setComments}) {
@@ -13,7 +14,8 @@ export default function CommentInput({user, setComments}) {
 
     async function handleSubmit() {
         const newComment = {text, owner: user._id}
-        const post = await commentAPI.createComment(postId, newComment)
+        await commentAPI.createComment(postId, newComment)
+        const post = await postAPI.show(postId)
         setComments(post.comments)
         setText("")
     }
