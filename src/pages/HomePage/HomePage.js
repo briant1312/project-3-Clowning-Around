@@ -15,10 +15,15 @@ function HomePage() {
         window.scrollTo(0, 0)
     }, [])
 
+    function handleClick() {
+      window.scrollTo(0, 0)
+    }
+
 
   return (
     <div>
     <PostList posts={posts} />
+    <p onClick={handleClick} className="back-to-top">Back to Top</p>
     </div>
   )
 }

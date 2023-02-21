@@ -22,13 +22,14 @@ export default function CreateForm({user}) {
     async function handleSubmit(event) {
         event.preventDefault()
         const postData = {title, text, owner: user._id}
-        const post = await postsAPI.create(postData)
+        await postsAPI.create(postData)
         navigate('/')
     }
 
     return (
         <div className='create-container'>
             <form className='create-post-form' onSubmit={handleSubmit}>
+            <h3 className='new-post-title'>Create New Post</h3>
                 <input
                     type='text'
                     name='title'

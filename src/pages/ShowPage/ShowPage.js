@@ -27,7 +27,7 @@ function ShowPage({user}) {
     }
     getPost(postId)
     window.scrollTo(0, 0)
-  }, [])
+  }, [postId])
 
   async function likePost() {
     const updatedPost = await postsAPI.likePost(post._id)
@@ -39,6 +39,10 @@ async function dislikePost() {
     const updatedPost = await postsAPI.dislikePost(post._id)
     setLikeTotal(updatedPost.likes.length - updatedPost.dislikes.length)
     sadhonk.play()
+}
+
+function handleClick() {
+  window.scrollTo(0, 0)
 }
 
   return (
@@ -53,6 +57,7 @@ async function dislikePost() {
     <CommentInput setComments={setComments} user={user} />
     <h3>Comments</h3>
     <CommentList setPost={setPost} setComments={setComments} user={user} comments={comments}/>
+    <p onClick={handleClick} className='back-to-top'>Back to Top</p>
     </div>
   )
 }
