@@ -14,26 +14,26 @@ The list below will include the necessities for successfully creating our projec
 
 ScreenShots
 ---------------
-![Login Page]
-![Home]
-![Post Update Page]
-![Post Page]
+![Login Page](images/LoginPage.png)
+![Home](/images/HomePage.png)
+![Post Page](/images/PostPage.png)
+![Create New Post](/images/CreateNewPost.png)
 
 
 MVP User Stories
 ----------------
 
-[x] As a user I want to be able to make an account
-[x] As a user I want to be able to log in
-[x] As a user I want to be able to log out
-[x] As a user I want to be able to view posts
-[x] As a user I want to be able to like or dislike a post
-[x] As a user I want to be able to comment on a post
-[x] As a user I want to see all comments on a post
-[x] As a user I want to be able to create a post
-[x] As a user I want to be able to delete my own post
-[x] As a user I want to be able to update my own post
-[x] As a user I want to be able to delete my own comments
+- [x] As a user I want to be able to make an account
+- [x] As a user I want to be able to log in
+- [x] As a user I want to be able to log out
+- [x] As a user I want to be able to view posts
+- [x] As a user I want to be able to like or dislike a post
+- [x] As a user I want to be able to comment on a post
+- [x] As a user I want to see all comments on a post
+- [x] As a user I want to be able to create a post
+- [x] As a user I want to be able to delete my own post
+- [x] As a user I want to be able to update my own post
+- [x] As a user I want to be able to delete my own comments
 
 Pitch Deck
 ---------------------
@@ -47,11 +47,11 @@ Check out our Trello Board describing the problems we hope to solve with our app
 
 Wireframes
 -----------------
-![Clowing Around Wireframe](images/CLOWING%20AROUND.png)
+![Clowing Around Wireframe](/images/ClowningAroundWireframe.png)
 
 ERD Breakdown 
 ---------------------
-![Clowing Around ERD](images/Clowning%20around.png)
+![Clowing Around ERD](/images/ClowningAroundERD.png)
 
 
 Next Versions
