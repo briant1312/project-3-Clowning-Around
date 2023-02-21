@@ -20,19 +20,27 @@ export default function UpdateForm() {
   
     useEffect(function() {
       async function getPost(postId) {
-        const post = await postsAPI.show(postId)
-        setTitle(post.title)
-        setText(post.text)
+        try {
+          const post = await postsAPI.show(postId)
+          setTitle(post.title)
+          setText(post.text)
+        } catch(err) {
+          console.error(err)
+        }
       }
       getPost(postId)
       window.scrollTo(0, 0)
     }, [postId])
 
     async function handleSubmit(event) {
-        event.preventDefault()
-        const postData = {title, text}
-        const updatedPost = await postsAPI.update(postId, postData)
-        navigate(`/view/${updatedPost._id}`)
+        try {
+          event.preventDefault()
+          const postData = {title, text}
+          const updatedPost = await postsAPI.update(postId, postData)
+          navigate(`/view/${updatedPost._id}`)
+        } catch(err) {
+          console.error(err)
+        }
     }
 
   return (

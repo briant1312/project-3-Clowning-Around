@@ -13,11 +13,15 @@ export default function CommentInput({user, setComments}) {
     }
 
     async function handleSubmit() {
+      try {
         const newComment = {text, owner: user._id}
         await commentAPI.createComment(postId, newComment)
         const post = await postAPI.show(postId)
         setComments(post.comments)
         setText("")
+      } catch(err) {
+        console.error(err)
+      }
     }
 
   return (

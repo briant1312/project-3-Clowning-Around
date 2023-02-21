@@ -14,28 +14,40 @@ export default function Comments({comment, user, setComments}) {
   sadhonk.playbackRate = 2
 
 async function likeComment() {
-    const updatedComment = await commentAPI.likeComment(postId,{id:comment._id})
+    try {
+      const updatedComment = await commentAPI.likeComment(postId,{id:comment._id})
       if(!(updatedComment.likes)){
         return
       }
-    setLikeTotal(updatedComment.likes.length - updatedComment.dislikes.length)
-    honk.play()
+      setLikeTotal(updatedComment.likes.length - updatedComment.dislikes.length)
+      honk.play()
+    } catch(err) {
+      console.error(err)
+    }
 
 }
 
 async function dislikeComment() {
-    const updatedComment = await commentAPI.dislikeComment(postId,{id:comment._id})
-    if(!(updatedComment.likes)){
-      return
+    try {
+      const updatedComment = await commentAPI.dislikeComment(postId,{id:comment._id})
+      if(!(updatedComment.likes)){
+        return
+      }
+      setLikeTotal(updatedComment.likes.length - updatedComment.dislikes.length)
+      sadhonk.play()
+    } catch(err) {
+      console.error(err)
     }
-    setLikeTotal(updatedComment.likes.length - updatedComment.dislikes.length)
-    sadhonk.play()
 }
 
 async function handleDelete(commentId) {
-    await commentAPI.deleteComment(postId, {id: commentId})
-    const post = await postsAPI.show(postId)
-    setComments(post.comments)
+    try {
+      await commentAPI.deleteComment(postId, {id: commentId})
+      const post = await postsAPI.show(postId)
+      setComments(post.comments)
+    } catch(err) {
+      console.error(err)
+    }
 }
 
   return (

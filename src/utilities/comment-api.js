@@ -2,25 +2,41 @@ import sendRequest from "./users-api";
 const BASE_URL = "/api/comment"
 
 export async function createComment(postId, comment) {
-    const post = await sendRequest(`${BASE_URL}/${postId}`, 'POST', comment)
-    return post
+    try {
+        const post = await sendRequest(`${BASE_URL}/${postId}`, 'POST', comment)
+        return post
+    } catch(err) {
+        console.error(err)
+    }
 }
 
 export async function deleteComment(postId, commentId) {
-    await sendRequest(`${BASE_URL}/${postId}`, 'DELETE', commentId)
-    return 
+    try {
+        await sendRequest(`${BASE_URL}/${postId}`, 'DELETE', commentId)
+        return 
+    } catch (err) {
+        console.error(err)
+    }
 }
 
 //Adding Like and Dislike to Comments 
 
 export async function likeComment(postId,commentId) {
-    const likedComment = await sendRequest(`${BASE_URL}/likes/${postId}`,'PATCH', commentId)
-    return likedComment
+    try {
+        const likedComment = await sendRequest(`${BASE_URL}/likes/${postId}`,'PATCH', commentId)
+        return likedComment
+    } catch(err) {
+        console.error(err)
+    }
 }
 
 //Body needs to include the comment.id
 
 export async function dislikeComment(postId,commentId) {
-   const dislikedComment = await sendRequest(`${BASE_URL}/dislikes/${postId}`,'PATCH', commentId)
-    return dislikedComment
+   try {
+        const dislikedComment = await sendRequest(`${BASE_URL}/dislikes/${postId}`,'PATCH', commentId)
+        return dislikedComment
+   } catch(err) {
+    console.error(err)
+   }
 }

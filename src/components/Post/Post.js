@@ -5,8 +5,12 @@ export default function Post({post, user, likePost, dislikePost, likeTotal}) {
   const navigate = useNavigate()
   
   async function handleDelete(postId) {
-    await postsAPI.deletePost(postId)
-    navigate('/')
+    try {
+      await postsAPI.deletePost(postId)
+      navigate('/')
+    } catch(err) {
+      console.error(err)
+    }
   }
 
   function handleClick(postId) {
