@@ -3,11 +3,15 @@ import * as commentAPI from '../../utilities/comment-api'
 import { useParams } from 'react-router-dom'
 import * as postsAPI from '../../utilities/posts-api'
 import { useState } from 'react'
+import sadhonkfile from '../../audio/sadhonk.mp3'
+
 
 export default function Comments({comment, user, setComments}) {
   const { postId } = useParams()
   const [likeTotal, setLikeTotal] = useState(comment.likes.length - comment.dislikes.length)
   const honk = new Audio("http://www.bubbasmonkey.com/COWS/bikehorn.wav")
+  let sadhonk = new Audio(sadhonkfile)
+  sadhonk.playbackRate = 2
 
 async function likeComment() {
     const updatedComment = await commentAPI.likeComment(postId,{id:comment._id})
@@ -25,7 +29,7 @@ async function dislikeComment() {
       return
     }
     setLikeTotal(updatedComment.likes.length - updatedComment.dislikes.length)
-    honk.play()
+    sadhonk.play()
 }
 
 async function handleDelete(commentId) {

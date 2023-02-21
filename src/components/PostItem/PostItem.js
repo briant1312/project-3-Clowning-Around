@@ -2,10 +2,13 @@ import { Link } from "react-router-dom"
 import * as postsAPI from '../../utilities/posts-api'
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
+import sadhonkfile from '../../audio/sadhonk.mp3'
+
 
 export default function PostItem({post}) {
     const [likeTotal, setLikeTotal] = useState(post.likes.length - post.dislikes.length)
-
+    let sadhonk = new Audio(sadhonkfile)
+    sadhonk.playbackRate = 2
     const honk = new Audio("http://www.bubbasmonkey.com/COWS/bikehorn.wav")
     const navigate = useNavigate()
   
@@ -21,7 +24,7 @@ export default function PostItem({post}) {
         event.stopPropagation()
         const updatedPost = await postsAPI.dislikePost(post._id)
         setLikeTotal(updatedPost.likes.length - updatedPost.dislikes.length)
-        honk.play()
+        sadhonk.play()
     }
 
     function navigateToShow() {

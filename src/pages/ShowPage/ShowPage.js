@@ -4,12 +4,16 @@ import CommentList from '../../components/CommentList/CommentList'
 import { useParams } from 'react-router-dom'
 import * as postsAPI from "../../utilities/posts-api"
 import CommentInput from '../../components/CommentInput/CommentInput'
+import sadhonkfile from '../../audio/sadhonk.mp3'
+
 
 function ShowPage({user}) {
   const [post, setPost] = useState({})
   const [comments, setComments] = useState([])
   const [likeTotal, setLikeTotal] = useState(0 && post.likes.length - post.dislikes.length)
   const honk = new Audio("http://www.bubbasmonkey.com/COWS/bikehorn.wav")
+  let sadhonk = new Audio(sadhonkfile)
+  sadhonk.playbackRate = 2
 
 
   const { postId } = useParams()
@@ -34,7 +38,7 @@ function ShowPage({user}) {
 async function dislikePost() {
     const updatedPost = await postsAPI.dislikePost(post._id)
     setLikeTotal(updatedPost.likes.length - updatedPost.dislikes.length)
-    honk.play()
+    sadhonk.play()
 }
 
   return (
