@@ -3,7 +3,6 @@ import { useState, useEffect } from "react"
 import * as postsAPI from "../../utilities/posts-api"
 
 export default function UpdateForm() {
-    const [post, setPost] = useState({})
     const [title, setTitle] = useState("")
     const [text, setText] = useState("")
 
@@ -27,7 +26,7 @@ export default function UpdateForm() {
       }
       getPost(postId)
       window.scrollTo(0, 0)
-    }, [])
+    }, [postId])
 
     async function handleSubmit(event) {
         event.preventDefault()

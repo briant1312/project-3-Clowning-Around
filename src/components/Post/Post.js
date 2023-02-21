@@ -1,6 +1,5 @@
 import * as postsAPI from '../../utilities/posts-api'
 import { useNavigate } from 'react-router-dom'
-import { useState } from 'react'
 
 export default function Post({post, user, likePost, dislikePost, likeTotal}) {
   const navigate = useNavigate()

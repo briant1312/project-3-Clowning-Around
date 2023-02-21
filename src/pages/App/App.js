@@ -8,14 +8,20 @@ import ShowPage from "../ShowPage/ShowPage"
 import CreateForm from "../CreateForm/CreateForm";
 import UpdateForm from "../UpdateForm/UpdateForm";
 import SideBar from "../../components/SideBar/SideBar";
+import { useNavigate } from "react-router-dom";
 
 function App() {
   const [user, setUser] = useState(getUser())
+  const navigate = useNavigate()
+
+  function handleClick() {
+    navigate('/')
+  }
 
   return (
     <main className="App">
       <div className="jumbotron">
-      <h1 className="display-4">
+      <h1 onClick={handleClick} className="display-4">
         <span style={{color: 'blue'}}>C</span>
         <span style={{color: 'red'}}>l</span>
         <span style={{color: 'green'}}>o</span>
