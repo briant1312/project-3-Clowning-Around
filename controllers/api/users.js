@@ -24,6 +24,10 @@ async function create(req, res, next) {
 async function logIn(req, res, next) {
     try {
         const user = await User.findOne({email: req.body.email})
+        if(!user) {
+            res.sendStatus(422)
+            return
+        }
         if(bcrypt.compareSync(req.body.password, user.password)) {
             res.json(createJWT(user))
         } 

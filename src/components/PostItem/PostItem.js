@@ -3,7 +3,6 @@ import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import sadhonkfile from '../../audio/sadhonk.mp3'
 
-
 export default function PostItem({post}) {
     const [likeTotal, setLikeTotal] = useState(post.likes.length - post.dislikes.length)
     let sadhonk = new Audio(sadhonkfile)

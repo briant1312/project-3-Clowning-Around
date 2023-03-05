@@ -6,10 +6,11 @@ export async function signUp(userData) {
 
         // for right now, thos won't be a token but we will be 
         // returning one eventually
+        if(!token) throw new Error('a;lskdfj')
         localStorage.setItem('token', token)
         return getUser()
     } catch(err) {
-        console.error(err)
+        throw new Error('')
     }
 }
 
@@ -60,10 +61,11 @@ export function logOut() {
 export async function logIn(credentials) {
     try {
         const token = await usersAPI.logIn(credentials)
+        if(!token) throw new Error('')
         localStorage.setItem('token', token)
         return getUser()
     } catch(err) {
-        console.error(err)
+        throw new Error(err)
     }
 }
 

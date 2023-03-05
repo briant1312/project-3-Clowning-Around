@@ -22,6 +22,10 @@ export default function LoginForm({setUser}) {
             const user = await logIn(credentials)
             setUser(user)
         } catch {
+            setCredentials({
+                email: '',
+                password: ''
+            })
             setError('Error Logging In')
         }
     }

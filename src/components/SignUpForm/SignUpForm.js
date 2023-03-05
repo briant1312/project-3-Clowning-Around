@@ -35,8 +35,11 @@ export default class SignUpForm extends Component{
              
 
         } catch (error){
-            console.error(error)
             this.setState({
+                name: '',
+                email: '',
+                password: '',
+                confirm: '',
                 error: "Sign up failed = Try again later"
             })
         }

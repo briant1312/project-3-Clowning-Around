@@ -26,7 +26,7 @@ export default function SideBar({user, setUser}) {
         </span>
 
         <h2>🚧 Rules 🚧</h2>
-        <p>
+        
         <ul className="rules">
             <li>Be respectful!</li>
             <br></br>
@@ -34,7 +34,7 @@ export default function SideBar({user, setUser}) {
             <br></br>
             <li>Clowns are supposed to be funny, no scary stuff!</li>
         </ul>
-        </p>
+
 
         <h2>🤡 About 🤡</h2>
         <p>
