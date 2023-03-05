@@ -30,7 +30,10 @@ async function logIn(req, res, next) {
         }
         if(bcrypt.compareSync(req.body.password, user.password)) {
             res.json(createJWT(user))
-        } 
+        } else {
+            res.sendStatus(422)
+            return
+        }
     } catch (error) {
         res.status.Code = 422
         throw error
