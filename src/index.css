@@ -191,7 +191,8 @@ button[type="submit"] {
   background-color: rgba(255,255,255,.8);
 }
 
-.post-owner {
+.post-owner,
+.comment-owner {
   position: absolute;
   right: 5px;
   bottom: -10px;
@@ -242,13 +243,13 @@ button[type="submit"] {
 }
 
 .comment-page .likes-container {
-  bottom: 0;
+  bottom: 8px;
 }
 
 .delete-comment {
   position: absolute;
   right: 10px;
-  bottom: 10px;
+  bottom: 40px;
 }
 
 .show-page {

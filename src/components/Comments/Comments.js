@@ -56,8 +56,8 @@ async function handleDelete(commentId) {
       {user._id === comment.owner._id ? <button className='delete-comment button' onClick={() => handleDelete(comment._id)}>Delete</button> : null}
       <div className="likes-container">
       <span className='like-button' onClick={likeComment}>💚</span><span>{likeTotal}</span><span className='dislike-button' onClick={dislikeComment}>🎈</span>
-      <p className='comment-owner'>Posted By: {comment.owner.name}</p>
       </div>    
+      <p className='comment-owner'>Posted By: {comment.owner.name}</p>
     </div>
   )
 }
