@@ -6,7 +6,7 @@ export async function signUp(userData) {
 
         // for right now, thos won't be a token but we will be 
         // returning one eventually
-        if(!token) throw new Error('a;lskdfj')
+        if(!token) throw new Error('')
         localStorage.setItem('token', token)
         return getUser()
     } catch(err) {
