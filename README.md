@@ -2,7 +2,7 @@ Project 3 - Clowning Around
 ==============================
 
 This is the README documentation for Slow to React's project 3.  
-We saw a desperate need for the clown community to get together and share knowledge without prejudice. Thus Clowning Around was born. So please stop by and hang out. You might just learn a new joke. 
+We saw a desperate need for the clown community to get together and share knowledge without prejudice. Thus Clowning Around was born. So please stop by and hang out. You might just learn a new joke. [This](https://clowning-around-client.onrender.com/) is the best place to Clown Around. 
 
 1. Screenshots
 2. MVP User Stories
@@ -58,14 +58,14 @@ Next Versions
 -------------
 
 Version 2 
-[] As a user I want to be able to update my own comments
-[] As a user I want to be able to upload a profile picture
-[] As a user I want to be able to search posts by tags
-[] As a user I want to be able to add pictures to my post
-[] As a user I want to be able to delete my account
+- [] As a user I want to be able to update my own comments
+- [] As a user I want to be able to upload a profile picture
+- [] As a user I want to be able to search posts by tags
+- [] As a user I want to be able to add pictures to my post
+- [] As a user I want to be able to delete my account
 
 Version 3
 
-[] As a user I want to be able to change my password
-[] As a user I want admins to be able to manage posts and comments
-[] As a user I want to change between dark and light theme
+- [] As a user I want to be able to change my password
+- [] As a user I want admins to be able to manage posts and comments
+- [] As a user I want to change between dark and light theme
