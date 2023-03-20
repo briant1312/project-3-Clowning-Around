@@ -65,17 +65,16 @@ async function addLike(req,res){
         const post = await Post.findById(req.params.id)
         if (!(post.likes.includes(req.user._id))){
             post.updateOne(post.likes.push(req.user._id))
+            if(post.dislikes.includes(req.user._id)) {
+                post.updateOne(post.dislikes.remove(req.user._id))
+            }
+            post.save()
+            res.json(post)
+        } else {
+            post.updateOne(post.likes.remove(req.user._id))
             post.save()
             res.json(post)
         }
-        else if(post.dislikes.includes(req.user._id)){
-            post.updateOne(post.dislikes.remove(req.user._id))
-            post.save()
-            res.json(post)
-        }
-        else {
-            res.json(post)
-    }
     } catch (err) {
         res.status(400).json(err)
     }
@@ -86,15 +85,14 @@ async function addDislike(req,res){
         const post = await Post.findById(req.params.id)
         if (!(post.dislikes.includes(req.user._id))){
             post.updateOne(post.dislikes.push(req.user._id))
+            if(post.likes.includes(req.user._id)) {
+                post.updateOne(post.likes.remove(req.user._id))
+            }
             post.save()
             res.json(post)
-        }
-        else if(post.likes.includes(req.user._id)){
-            post.updateOne(post.likes.remove(req.user._id))
+        } else {
+            post.updateOne(post.dislikes.remove(req.user._id))
             post.save()
-            res.json(post)
-        }
-        else {
             res.json(post)
         }
     } catch(err) {
