@@ -10,7 +10,7 @@ function HomePage() {
         async function getPosts(){
             try {
               const posts = await postsAPI.index()
-              setPosts(posts)
+              setPosts(posts.reverse())
             } catch(err) {
               console.error(err)
             }

@@ -1,0 +1,16 @@
+.selected-page {
+    color: red;
+    position: relative;
+    text-decoration: underline;
+}
+
+.paginate-container {
+    margin-top: 1rem;
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.paginate-container span {
+    cursor: pointer;
+}
