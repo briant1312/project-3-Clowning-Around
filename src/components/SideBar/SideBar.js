@@ -1,20 +1,26 @@
 import { Link } from "react-router-dom"
 import * as userService from "../../utilities/users-service"
 
-export default function SideBar({user, setUser}) {
+export default function SideBar({user, setUser, visible, setMenuIconVisible}) {
     function handleLogOut() {
         // we should delegate the actual loggin out to the users service
         userService.logOut()
         setUser(null)
+        setMenuIconVisible(true)
     }
+
+    function handleClick() {
+        setMenuIconVisible(true)
+    }
+
     return (
-        <div className="side-bar">    
+        <div className={visible ? 'side-bar' : 'visible side-bar'}>    
         <span>
          🚗 Welcome, {user.name} 🚗
         </span>
   
         <span>
-            <Link to = '/'>Home</Link>
+            <Link onClick={handleClick} to = '/'>Home</Link>
         </span>
     
         <span className="log-out">
@@ -22,7 +28,7 @@ export default function SideBar({user, setUser}) {
         </span>
 
         <span>
-            <Link to = '/new/post'>Create New Post</Link>
+            <Link onClick={handleClick} to = '/new/post'>Create New Post</Link>
         </span>
 
         <h2>🚧 Rules 🚧</h2>

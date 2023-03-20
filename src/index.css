@@ -44,6 +44,10 @@ body {
   background-size: cover;
 }
 
+.visible {
+  display: flex !important;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
@@ -218,10 +222,77 @@ button[type="submit"] {
   cursor: pointer;
 }
 
+.menu-icon {
+  position: absolute;
+  top: 1rem;
+  right: 2rem;
+  width:  3rem;
+  height: 3rem;
+  border: 1px solid black;
+  border-radius: 10px;
+  cursor: pointer;
+  display: none;
+  background-color: rgba(255, 255, 255, 0.9);
+  z-index: 10;
+}
+
+.hamburger {
+  content: '';
+  display: block;
+  width: 2rem;
+  height: .2rem;
+  background-color: black;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.hamburger::before {
+  content: '';
+  display: block;
+  width: 2rem;
+  height: .2rem;
+  background-color: black;
+  position: relative;
+  top: -10px;
+}
+
+.hamburger::after {
+  content: '';
+  display: block;
+  width: 2rem;
+  height: .2rem;
+  background-color: black;
+  position: relative;
+  top: 8px;
+}
+
+.close::before {
+  content: 'x';
+  font-size: 3rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.background-cover {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 150vh;
+  width: 150vw;
+  background-color: rgba(94, 94, 94, 0.8);
+  z-index: 9;
+  display: none;
+}
+
 .side-bar {
   display: flex;
   flex-direction: column;
-  width: 20vw;
+  max-width: 20vw;
+  min-width: min-content;
   position: absolute;
   border: 2px solid black;
   right: 10px;
@@ -229,6 +300,7 @@ button[type="submit"] {
   padding: 5px;
   border-radius: 20px;
   background-color:rgba(255,255,255,.8);
+  z-index: 11;
 }
 
 .comment-page {
@@ -400,4 +472,43 @@ h1 {
   text-align: center;
   list-style-type: none;
   padding: 5px;
+}
+
+@media only screen and (max-width: 53.12em) {
+  .side-bar {
+    display: none;
+    background-color: white;
+    z-index: 100;
+    max-width: 40vw
+  }
+
+  .menu-icon {
+    display: block;
+  }
+
+  .post-container,
+  .show-page,
+  .comment-page,
+  .create-container {
+    width: 95vw;
+  }
+
+}
+
+@media only screen and (max-width: 26.9em) {
+  .jumbotron {
+    margin-top: 3.5rem;
+  }
+
+  .post-container,
+  .show-page,
+  .comment-page,
+  .create-container {
+    width: 95%;
+  }
+
+  .side-bar {
+    max-width: 60vw;
+    right: 0;
+  }
 }

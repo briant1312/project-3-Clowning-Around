@@ -12,10 +12,15 @@ import { useNavigate } from "react-router-dom";
 
 function App() {
   const [user, setUser] = useState(getUser())
+  const [menuIconVisible, setMenuIconVisible] = useState(true)
   const navigate = useNavigate()
 
   function handleClick() {
     navigate('/')
+  }
+
+  function toggleMenu() {
+    setMenuIconVisible(!menuIconVisible)
   }
 
   return (
@@ -41,7 +46,9 @@ function App() {
       </div>
       { user ?
         <>
-          <SideBar setUser={setUser} user={user}/>
+          <div onClick={toggleMenu} className="menu-icon"><span className={menuIconVisible ? 'hamburger' : 'close'}></span></div>
+          <div className={menuIconVisible ? "background-cover" : "background-cover visible"}></div>
+          <SideBar setMenuIconVisible={setMenuIconVisible} visible={menuIconVisible} setUser={setUser} user={user}/>
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/view/:postId" element={<ShowPage user={user}/>} />
