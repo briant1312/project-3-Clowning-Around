@@ -1,5 +1,5 @@
 import * as postsAPI from '../../utilities/posts-api'
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import sadhonkfile from '../../audio/sadhonk.mp3'
 
@@ -9,6 +9,10 @@ export default function PostItem({post}) {
     sadhonk.playbackRate = 2
     const honk = new Audio("http://www.bubbasmonkey.com/COWS/bikehorn.wav")
     const navigate = useNavigate()
+
+    useEffect(() => {
+        setLikeTotal(post.likes.length - post.dislikes.length)
+    }, [post])
   
 
     async function likePost(event) {
