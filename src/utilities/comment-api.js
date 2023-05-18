@@ -1,6 +1,5 @@
 import sendRequest from "./users-api";
-const BASE_URL = "https://clowning-around-server.onrender.com/api/comment"
-// const BASE_URL = "/api/comment"
+const BASE_URL = process.env.REACT_APP_BASE_URL + "comment"
 
 export async function createComment(postId, comment) {
     try {
