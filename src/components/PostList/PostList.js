@@ -2,7 +2,7 @@ import PostItem from "../PostItem/PostItem"
 import { useState, useEffect } from "react"
 import Paginate from "../Paginate/Paginate"
 
-export default function PostList({posts}) {
+export default function PostList({posts, user}) {
     const [displayed, setDisplayed] = useState(posts.slice(0,10))
 
     useEffect(() => {
@@ -12,7 +12,7 @@ export default function PostList({posts}) {
     return (
         <div className="post-container">
             {displayed.map((post, index) => (
-                <PostItem key={index} post={post}/>
+                <PostItem key={index} post={post} user={user}/>
             ))}
             <Paginate 
                 setDisplayed={setDisplayed}

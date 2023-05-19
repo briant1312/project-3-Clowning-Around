@@ -50,7 +50,7 @@ function App() {
           <div className={menuIconVisible ? "background-cover" : "background-cover visible"}></div>
           <SideBar setMenuIconVisible={setMenuIconVisible} visible={menuIconVisible} setUser={setUser} user={user}/>
           <Routes>
-            <Route path="/" element={<HomePage />} />
+            <Route path="/" element={<HomePage user={user}/>} />
             <Route path="/view/:postId" element={<ShowPage user={user}/>} />
             <Route path="/new/post" element={<CreateForm user={user} />} />
             <Route path="/update/:postId" element={<UpdateForm user={user} />} />
