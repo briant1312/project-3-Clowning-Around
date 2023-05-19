@@ -24,6 +24,7 @@ export default function PostItem({post, user }) {
             const updatedPost = await postsAPI.likePost(post._id)
             setLikeTotal(updatedPost.likes.length - updatedPost.dislikes.length)
             setUserLiked(updatedPost.likes.includes(user._id))
+            setUserDisliked(updatedPost.dislikes.includes(user._id))
             honk.play()
         } catch(err) {
             console.error(err)
@@ -36,6 +37,7 @@ export default function PostItem({post, user }) {
             const updatedPost = await postsAPI.dislikePost(post._id)
             setLikeTotal(updatedPost.likes.length - updatedPost.dislikes.length)
             setUserDisliked(updatedPost.dislikes.includes(user._id))
+            setUserLiked(updatedPost.likes.includes(user._id))
             sadhonk.play()
         } catch(err) {
             console.error(err)

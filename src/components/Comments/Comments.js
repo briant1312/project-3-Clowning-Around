@@ -40,6 +40,7 @@ async function likeComment() {
         return
       }
       setUserLiked(updatedComment.likes.includes(user._id))
+      setUserDisliked(updatedComment.dislikes.includes(user._id))
       setLikeTotal(updatedComment.likes.length - updatedComment.dislikes.length)
       honk.play()
     } catch(err) {
@@ -55,6 +56,7 @@ async function dislikeComment() {
         return
       }
       setUserDisliked(updatedComment.dislikes.includes(user._id))
+      setUserLiked(updatedComment.likes.includes(user._id))
       setLikeTotal(updatedComment.likes.length - updatedComment.dislikes.length)
       sadhonk.play()
     } catch(err) {
