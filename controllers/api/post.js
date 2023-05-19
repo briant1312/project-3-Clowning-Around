@@ -13,7 +13,7 @@ async function create(req, res){
 async function index(req, res) {
 	try {
         const posts = await Post.find({}).populate('owner')
-        res.json(posts)
+        res.json(posts.reverse())
     } catch (err) {
         res.status(400).json(err)
     }
