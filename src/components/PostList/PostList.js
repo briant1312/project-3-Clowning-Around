@@ -1,5 +1,5 @@
 import PostListItem from "../PostListItem/PostListItem"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef, useCallback } from "react"
 import * as postsAPI from "../../utilities/posts-api"
 
 export default function PostList({ user }) {
@@ -7,19 +7,19 @@ export default function PostList({ user }) {
     const [page, setPage] = useState(1)
     const [endOfResults, setEndOfResults] = useState(false)
 
-    let isLoading = false
+    const isLoadingRef = useRef(false);
 
     useEffect(() => {
         async function getPosts() {
             try {
-                isLoading = true
+                isLoadingRef.current = true
                 const posts = await postsAPI.index(page)
                 setPosts(posts)
                 setPage(2)
-                isLoading = false
+                isLoadingRef.current = false
             } catch (err) {
                 console.error(err)
-                isLoading = false
+                isLoadingRef.current = false
             }
         }
 
@@ -27,30 +27,30 @@ export default function PostList({ user }) {
         window.scrollTo(0, 0)
     }, [])
 
-    useEffect(() => {
-        if(endOfResults) return;
-        window.addEventListener("scroll", handleScroll)
-        return () => window.removeEventListener("scroll", handleScroll)
-    }, [page, endOfResults])
-
-    async function handleScroll() {
-        if(isLoading) return
+    const handleScroll = useCallback(async () => {
+        if(isLoadingRef.current) return
         const scrollHeight = window.scrollY
         const totalHeight = document.documentElement.scrollHeight - window.innerHeight
         if(totalHeight - scrollHeight < 25) {
             try {
-                isLoading = true
+                isLoadingRef.current = true
                 const newPosts = await postsAPI.index(page)
                 if(!newPosts.length) setEndOfResults(true)
                 setPosts([...posts, ...newPosts])
                 setPage(prev => prev + 1)
-                isLoading = false
+                isLoadingRef.current = false
             } catch (err) {
                 console.error(err)
-                isLoading = false
+                isLoadingRef.current = false
             }
         }
-    }   
+    }, [page, posts])
+
+    useEffect(() => {
+        if(endOfResults) return;
+        window.addEventListener("scroll", handleScroll)
+        return () => window.removeEventListener("scroll", handleScroll)
+    }, [page, endOfResults, handleScroll])
 
     return (
         <div className="post-container">
