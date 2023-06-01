@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import Post from '../../components/Post/Post'
+import PostShowItem from '../../components/PostShowItem/PostShowItem'
 import CommentList from '../../components/CommentList/CommentList'
 import { useParams } from 'react-router-dom'
 import * as postsAPI from "../../utilities/posts-api"
@@ -80,7 +80,7 @@ function ShowPage({ user }) {
 
   return (
     <div className="show-page">
-      <Post
+      <PostShowItem
         likeTotal={likeTotal}
         user={user}
         post={post}

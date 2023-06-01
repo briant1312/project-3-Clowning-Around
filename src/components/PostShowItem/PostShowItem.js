@@ -1,7 +1,7 @@
 import * as postsAPI from '../../utilities/posts-api'
 import { useNavigate } from 'react-router-dom'
 
-export default function Post({post, user, likePost, dislikePost, likeTotal, userLiked, userDisliked, colorLikeArrows}) {
+export default function PostShowItem({post, user, likePost, dislikePost, likeTotal, userLiked, userDisliked, colorLikeArrows}) {
 
   const navigate = useNavigate()
 
