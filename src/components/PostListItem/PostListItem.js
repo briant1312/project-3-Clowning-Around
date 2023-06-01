@@ -1,5 +1,5 @@
 import * as postsAPI from '../../utilities/posts-api'
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import sadhonkfile from '../../audio/sadhonk.mp3'
 
@@ -12,11 +12,6 @@ export default function PostItem({ post, user }) {
     sadhonk.playbackRate = 2
     const honk = new Audio("http://www.bubbasmonkey.com/COWS/bikehorn.wav")
     const navigate = useNavigate()
-
-    useEffect(() => {
-        setLikeTotal(post.likes.length - post.dislikes.length)
-    }, [post])
-  
 
     async function likePost(event) {
         try {
@@ -48,18 +43,6 @@ export default function PostItem({ post, user }) {
         navigate(`/view/${post._id}`)
     }
 
-    function colorLikeArrows(buttonType) {
-        if(buttonType === "like") {
-            if(userLiked) return "blue"
-            return "gray"
-        }
-        if(userDisliked) return "orangered"
-        return "gray"
-    }
-
-    let likeButtonColor = colorLikeArrows("like")
-    let dislikeButtonColor = colorLikeArrows("dislike")
-
     return (
         <div onClick={navigateToShow} className="post-item">
             <span className="post-title">{post.title}</span>
@@ -68,7 +51,7 @@ export default function PostItem({ post, user }) {
                 <span
                     className="like-button"
                     onClick={likePost}
-                    style={{ color: likeButtonColor }}
+                    style={{ color: userLiked && "blue" }}
                 >
                     ⬆︎
                 </span>
@@ -76,7 +59,7 @@ export default function PostItem({ post, user }) {
                 <span 
                     className="dislike-button" 
                     onClick={dislikePost}
-                    style={{ color: dislikeButtonColor }}
+                    style={{ color: userDisliked && "orangered" }}
                 >
                     ⬇︎
                 </span>

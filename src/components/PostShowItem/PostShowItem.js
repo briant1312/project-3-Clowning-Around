@@ -15,11 +15,6 @@ export default function PostShowItem({ user }) {
 
     const { postId } = useParams()
 
-    useEffect(() => {
-        setUserLiked(post.likes && post.likes.includes(user._id))
-        setUserDisliked(post.likes && post.dislikes.includes(user._id))
-    }, [post, user._id])
-
     useEffect(function () {
         async function getPost(postId) {
             try {
@@ -27,13 +22,15 @@ export default function PostShowItem({ user }) {
                 setPost(post)
                 setComments(post.comments)
                 setLikeTotal(post.likes.length - post.dislikes.length)
+                setUserLiked(post.likes.includes(user._id))
+                setUserDisliked(post.dislikes.includes(user._id))
             } catch (err) {
                 console.error(err)
             }
         }
         getPost(postId)
         window.scrollTo(0, 0)
-    }, [postId])
+    }, [postId, user])
 
     const honk = new Audio("http://www.bubbasmonkey.com/COWS/bikehorn.wav")
     let sadhonk = new Audio(sadhonkfile)
@@ -74,21 +71,9 @@ export default function PostShowItem({ user }) {
         }
     }
 
-    function colorLikeArrows(buttonType) {
-        if (buttonType === "like") {
-            if (userLiked) return "blue"
-            return "gray"
-        }
-        if (userDisliked) return "orangered"
-        return "gray"
-    }
-
     function handleUpdate() {
         navigate(`/update/${post._id}`)
     }
-
-    let likeButtonColor = colorLikeArrows("like")
-    let dislikeButtonColor = colorLikeArrows("dislike")
 
     return (
         <>
@@ -109,7 +94,7 @@ export default function PostShowItem({ user }) {
                     <span
                         className='like-button'
                         onClick={likePost}
-                        style={{ color: likeButtonColor }}
+                        style={{ color: userLiked && "blue" }}
                     >
                         ⬆
                     </span>
@@ -117,7 +102,7 @@ export default function PostShowItem({ user }) {
                     <span
                         className='dislike-button'
                         onClick={dislikePost}
-                        style={{ color: dislikeButtonColor }}
+                        style={{ color: userDisliked && "orangered" }}
                     >
                         ⬇︎
                     </span>
