@@ -21,7 +21,7 @@ async function index(req, res) {
     } else {
         try {
             const page = (parseInt(req.query.page) || 1) - 1
-            const perPage = 2
+            const perPage = 10
             const posts = await Post.find()
                 .limit(perPage)
                 .sort({ $natural: -1 })

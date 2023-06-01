@@ -2,9 +2,9 @@ import sendRequest from "./users-api";
 const BASE_URL = process.env.REACT_APP_BASE_URL + "post"
 
 
-export async function index() {
+export async function index(page) {
     try {
-        const posts = await sendRequest(BASE_URL)
+        const posts = await sendRequest(`${BASE_URL}/?page=${page}`)
         return posts
     } catch(err) {
         console.error(err)
