@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom'
 import * as postsAPI from '../../utilities/posts-api'
 import { useState } from 'react'
 import sadhonkfile from '../../audio/sadhonk.mp3'
-
+import { TbArrowBigUpFilled, TbArrowBigDownFilled } from "react-icons/tb"
 
 export default function Comments({ comment, user, setComments }) {
     const { postId } = useParams()
@@ -67,7 +67,7 @@ export default function Comments({ comment, user, setComments }) {
                     onClick={likeComment}
                     style={{ color: userLiked && "blue" }}
                 >
-                    ⬆︎
+                    <TbArrowBigUpFilled />
                 </span>
                 <span>{likeTotal}</span>
                 <span
@@ -75,7 +75,7 @@ export default function Comments({ comment, user, setComments }) {
                     onClick={dislikeComment}
                     style={{ color: userDisliked && "orangered" }}
                 >
-                    ⬇︎
+                    <TbArrowBigDownFilled />
                 </span>
             </div>
             <p className='comment-owner'>Posted By: {comment.owner.name}</p>

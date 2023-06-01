@@ -2,6 +2,7 @@ import * as postsAPI from '../../utilities/posts-api'
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import sadhonkfile from '../../audio/sadhonk.mp3'
+import { TbArrowBigUpFilled, TbArrowBigDownFilled } from "react-icons/tb"
 
 export default function PostItem({ post, user }) {
     const [likeTotal, setLikeTotal] = useState(post.likes.length - post.dislikes.length)
@@ -53,7 +54,7 @@ export default function PostItem({ post, user }) {
                     onClick={likePost}
                     style={{ color: userLiked && "blue" }}
                 >
-                    ⬆︎
+                    <TbArrowBigUpFilled />
                 </span>
                 <span>{likeTotal}</span>
                 <span 
@@ -61,7 +62,7 @@ export default function PostItem({ post, user }) {
                     onClick={dislikePost}
                     style={{ color: userDisliked && "orangered" }}
                 >
-                    ⬇︎
+                    <TbArrowBigDownFilled />
                 </span>
             </div>
             <p className="comment-count">Comments: {post.comments.length}</p>

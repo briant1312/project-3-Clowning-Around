@@ -5,6 +5,7 @@ import CommentInput from '../../components/CommentInput/CommentInput'
 import sadhonkfile from '../../audio/sadhonk.mp3'
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
+import { TbArrowBigUpFilled, TbArrowBigDownFilled } from "react-icons/tb"
 
 export default function PostShowItem({ user }) {
     const [post, setPost] = useState({})
@@ -96,7 +97,7 @@ export default function PostShowItem({ user }) {
                         onClick={likePost}
                         style={{ color: userLiked && "blue" }}
                     >
-                        ⬆
+                        <TbArrowBigUpFilled />
                     </span>
                     <span>{likeTotal}</span>
                     <span
@@ -104,7 +105,7 @@ export default function PostShowItem({ user }) {
                         onClick={dislikePost}
                         style={{ color: userDisliked && "orangered" }}
                     >
-                        ⬇︎
+                        <TbArrowBigDownFilled />
                     </span>
                 </div>
                 <p className='post-owner'>Posted By: {post.owner && post.owner.name}</p>

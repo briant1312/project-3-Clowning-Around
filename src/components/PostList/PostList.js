@@ -31,7 +31,7 @@ export default function PostList({ user }) {
         if(isLoadingRef.current) return
         const scrollHeight = window.scrollY
         const totalHeight = document.documentElement.scrollHeight - window.innerHeight
-        if(totalHeight - scrollHeight < 25) {
+        if(totalHeight - scrollHeight < 100) {
             try {
                 isLoadingRef.current = true
                 const newPosts = await postsAPI.index(page)
