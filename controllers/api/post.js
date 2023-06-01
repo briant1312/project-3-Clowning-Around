@@ -11,11 +11,27 @@ async function create(req, res){
 }
 
 async function index(req, res) {
-	try {
-        const posts = await Post.find({}).populate('owner')
-        res.json(posts.reverse())
-    } catch (err) {
-        res.status(400).json(err)
+    if(!req.query.page) {
+        try {
+            const posts = await Post.find({}).populate('owner')
+            res.json(posts.reverse())
+        } catch (err) {
+            res.status(400).json(err)
+        }
+    } else {
+        try {
+            const page = (parseInt(req.query.page) || 1) - 1
+            const perPage = 2
+            const posts = await Post.find()
+                .limit(perPage)
+                .sort({ $natural: -1 })
+                .skip(perPage * page)
+                .populate("owner")
+
+            res.json(posts)
+        } catch (err) {
+            res.status(400).json(err)
+        }
     }
 }
 
@@ -110,5 +126,5 @@ module.exports = {
     update,
     createComment,
     addLike,
-    addDislike
+    addDislike,
 }
