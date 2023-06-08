@@ -6,7 +6,7 @@ import { useState } from 'react'
 import sadhonkfile from '../../audio/sadhonk.mp3'
 import { TbArrowBigUpFilled, TbArrowBigDownFilled } from "react-icons/tb"
 
-export default function Comments({ comment, user, setComments }) {
+export default function Comment({ comment, user, setComments }) {
     const { postId } = useParams()
     const [likeTotal, setLikeTotal] = useState(comment.likes.length - comment.dislikes.length)
     const [userLiked, setUserLiked] = useState(comment.likes.includes(user._id));

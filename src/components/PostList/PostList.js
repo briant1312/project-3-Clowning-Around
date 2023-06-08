@@ -4,18 +4,18 @@ import * as postsAPI from "../../utilities/posts-api"
 
 export default function PostList({ user }) {
     const [posts, setPosts] = useState([])
-    const [page, setPage] = useState(1)
-    const [endOfResults, setEndOfResults] = useState(false)
 
+    const pageRef = useRef(1);
+    const endOfResultsRef = useRef(false);
     const isLoadingRef = useRef(false);
 
     useEffect(() => {
         async function getPosts() {
             try {
                 isLoadingRef.current = true
-                const posts = await postsAPI.index(page)
+                const posts = await postsAPI.index(pageRef.current)
                 setPosts(posts)
-                setPage(2)
+                pageRef.current = 2;
                 isLoadingRef.current = false
             } catch (err) {
                 console.error(err)
@@ -34,23 +34,23 @@ export default function PostList({ user }) {
         if(totalHeight - scrollHeight < 100) {
             try {
                 isLoadingRef.current = true
-                const newPosts = await postsAPI.index(page)
-                if(!newPosts.length) setEndOfResults(true)
+                const newPosts = await postsAPI.index(pageRef.current)
+                if(!newPosts.length) endOfResultsRef.current = true;
                 setPosts([...posts, ...newPosts])
-                setPage(prev => prev + 1)
+                pageRef.current = pageRef.current + 1;
                 isLoadingRef.current = false
             } catch (err) {
                 console.error(err)
                 isLoadingRef.current = false
             }
         }
-    }, [page, posts])
+    }, [posts])
 
     useEffect(() => {
-        if(endOfResults) return;
+        if(endOfResultsRef.current) return;
         window.addEventListener("scroll", handleScroll)
         return () => window.removeEventListener("scroll", handleScroll)
-    }, [page, endOfResults, handleScroll])
+    }, [handleScroll])
 
     return (
         <div className="post-container">
