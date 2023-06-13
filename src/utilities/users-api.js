@@ -44,6 +44,16 @@ export default async function sendRequest(url, method='GET', payload=null) {
     }
 }
 
+export const setHeaders = () => {
+    const headers = { "Content-Type": "application/json" }
+    const token = getToken()
+    if (token) {
+        headers.Authorization = `Bearer ${token}`
+    }
+
+    return headers
+}
+
 export async function checkToken() {
     try {
         return sendRequest(BASE_URL + '/check-token')
