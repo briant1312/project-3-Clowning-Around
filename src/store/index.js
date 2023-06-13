@@ -10,6 +10,12 @@ export const store = configureStore({
         [usersApi.reducerPath]: usersApi.reducer,
         [postsApi.reducerPath]: postsApi.reducer,
         [commentsApi.reducerPath]: commentsApi.reducer
+    },
+    middleware: (getDefaultMiddleware) => {
+        return getDefaultMiddleware()
+            .concat(usersApi.middleware)
+            .concat(postsApi.middleware)
+            .concat(commentsApi.middleware)
     }
 })
 
