@@ -1,4 +1,4 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
 import { setHeaders } from "../../utilities/users-api";
 
 const commentsApi = createApi({

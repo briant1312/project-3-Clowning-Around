@@ -1,4 +1,4 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
 import { setHeaders } from "../../utilities/users-api";
 
 const postsApi = createApi({
@@ -85,13 +85,13 @@ const postsApi = createApi({
 })
 
 export const {
-    useFetchAllPostsQuery,
-    useFetchPostQuery,
-    useCreatePostMutation,
-    useDeletePostMutation,
-    useUpdatePostMutation,
-    useLikePostMutation,
-    useDislikePostMutation
+    useLazyFetchAllPostsQuery,
+    useLazyFetchPostQuery,
+    useLazyCreatePostMutation,
+    useLazyDeletePostMutation,
+    useLazyUpdatePostMutation,
+    useLazyLikePostMutation,
+    useLazyDislikePostMutation
 } = postsApi;
 
 export { postsApi }

@@ -27,13 +27,13 @@ export {
 } from "./apis/usersApi"
 
 export {
-    useFetchAllPostsQuery,
-    useFetchPostQuery,
-    useCreatePostMutation,
-    useDeletePostMutation,
-    useUpdatePostMutation,
-    useLikePostMutation,
-    useDislikePostMutation
+    useLazyFetchAllPostsQuery,
+    useLazyFetchPostQuery,
+    useLazyCreatePostMutation,
+    useLazyDeletePostMutation,
+    useLazyUpdatePostMutation,
+    useLazyLikePostMutation,
+    useLazyDislikePostMutation
 } from "./apis/postsApi"
 
 export {

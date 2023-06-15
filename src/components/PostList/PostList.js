@@ -1,9 +1,10 @@
 import PostListItem from "../PostListItem/PostListItem"
 import { useState, useEffect, useRef, useCallback } from "react"
-import * as postsAPI from "../../utilities/posts-api"
+import { useLazyFetchAllPostsQuery } from "../../store"
 
 export default function PostList({ user }) {
     const [posts, setPosts] = useState([])
+    const [ fetchAllPosts, { isFetching, error }] = useLazyFetchAllPostsQuery();
 
     const pageRef = useRef(1);
     const endOfResultsRef = useRef(false);
@@ -13,8 +14,8 @@ export default function PostList({ user }) {
         async function getPosts() {
             try {
                 isLoadingRef.current = true
-                const posts = await postsAPI.index(pageRef.current)
-                setPosts(posts)
+                const { data } = await fetchAllPosts(pageRef.current)
+                setPosts(data)
                 pageRef.current = 2;
                 isLoadingRef.current = false
             } catch (err) {
@@ -25,26 +26,27 @@ export default function PostList({ user }) {
 
         getPosts()
         window.scrollTo(0, 0)
-    }, [])
+    }, [fetchAllPosts])
 
     const handleScroll = useCallback(async () => {
         if(isLoadingRef.current) return
+        isLoadingRef.current = true
         const scrollHeight = window.scrollY
         const totalHeight = document.documentElement.scrollHeight - window.innerHeight
         if(totalHeight - scrollHeight < 100) {
             try {
-                isLoadingRef.current = true
-                const newPosts = await postsAPI.index(pageRef.current)
-                if(!newPosts.length) endOfResultsRef.current = true;
-                setPosts([...posts, ...newPosts])
+                const { data } = await fetchAllPosts(pageRef.current)
+                if(!data.length) endOfResultsRef.current = true;
+                setPosts([...posts, ...data])
                 pageRef.current = pageRef.current + 1;
                 isLoadingRef.current = false
+                window.removeEventListener("scroll", handleScroll)
             } catch (err) {
                 console.error(err)
                 isLoadingRef.current = false
             }
-        }
-    }, [posts])
+        } else isLoadingRef.current = false
+    }, [posts, fetchAllPosts])
 
     useEffect(() => {
         if(endOfResultsRef.current) return;
@@ -57,6 +59,8 @@ export default function PostList({ user }) {
             {posts && posts.map((post) => (
                 <PostListItem key={post._id} post={post} user={user} />
             ))}
+            {isFetching && <div>Loading...</div>}
+            {error && <div>Error loading content. Please refresh the page</div>}
         </div>
     )
 }
