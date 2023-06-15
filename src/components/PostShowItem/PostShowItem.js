@@ -1,4 +1,3 @@
-import * as postsAPI from '../../utilities/posts-api'
 import { useNavigate } from 'react-router-dom'
 import CommentList from '../../components/CommentList/CommentList'
 import CommentInput from '../../components/CommentInput/CommentInput'
@@ -6,67 +5,75 @@ import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { TbArrowBigUpFilled, TbArrowBigDownFilled } from "react-icons/tb"
 import useSounds from '../../hooks/useSounds'
+import { 
+    useLazyFetchPostQuery, 
+    useLikePostMutation, 
+    useDislikePostMutation, 
+    useDeletePostMutation 
+} from '../../store'
 
 export default function PostShowItem({ user }) {
     const [post, setPost] = useState({})
     const [comments, setComments] = useState([])
     const [likeTotal, setLikeTotal] = useState(0)
-    const [userLiked, setUserLiked] = useState(false);
-    const [userDisliked, setUserDisliked] = useState(false);
+    const [userLiked, setUserLiked] = useState(false)
+    const [userDisliked, setUserDisliked] = useState(false)
+    const [ fetchPost, { isFetching, error } ] = useLazyFetchPostQuery()
+    const [ likePost ] = useLikePostMutation()
+    const [ dislikePost ] = useDislikePostMutation()
+    const [ deletePost ] = useDeletePostMutation()
     const { bikeHornSound, sadHonkSound } = useSounds()
 
     const { postId } = useParams()
 
     useEffect(function () {
+        window.scrollTo(0, 0)
         async function getPost(postId) {
             try {
-                const post = await postsAPI.show(postId)
-                setPost(post)
-                setComments(post.comments)
-                setLikeTotal(post.likes.length - post.dislikes.length)
-                setUserLiked(post.likes.includes(user._id))
-                setUserDisliked(post.dislikes.includes(user._id))
+                const { data } = await fetchPost(postId)
+                setPost(data)
+                setComments(data.comments)
+                setLikeTotal(data.likes.length - data.dislikes.length)
+                setUserLiked(data.likes.includes(user._id))
+                setUserDisliked(data.dislikes.includes(user._id))
             } catch (err) {
                 console.error(err)
             }
         }
         getPost(postId)
-        window.scrollTo(0, 0)
-    }, [postId, user])
+    }, [postId, user, fetchPost])
 
     const navigate = useNavigate()
 
-    async function handleDelete() {
-        try {
-            await postsAPI.deletePost(postId)
-            navigate('/')
-        } catch (err) {
-            console.error(err)
-        }
+    function handleDelete() {
+        deletePost(postId)
+            .unwrap()
+            .then(() => navigate('/'))
+            .catch(err => console.error(err))
     }
 
-    async function likePost() {
-        try {
-            const updatedPost = await postsAPI.likePost(post._id)
-            setLikeTotal(updatedPost.likes.length - updatedPost.dislikes.length)
-            setUserLiked(updatedPost.likes.includes(user._id))
-            setUserDisliked(updatedPost.dislikes.includes(user._id))
-            bikeHornSound()
-        } catch (err) {
-            console.error(err)
-        }
+    function handleLikePost() {
+        bikeHornSound()
+        likePost(postId)
+            .unwrap()
+            .then(updatedPost => {
+                setLikeTotal(updatedPost.likes.length - updatedPost.dislikes.length)
+                setUserLiked(updatedPost.likes.includes(user._id))
+                setUserDisliked(updatedPost.dislikes.includes(user._id))
+            })
+            .catch(err => console.error(err))
     }
 
-    async function dislikePost() {
-        try {
-            const updatedPost = await postsAPI.dislikePost(post._id)
-            setLikeTotal(updatedPost.likes.length - updatedPost.dislikes.length)
-            setUserLiked(updatedPost.likes.includes(user._id))
-            setUserDisliked(updatedPost.dislikes.includes(user._id))
-            sadHonkSound()
-        } catch (err) {
-            console.error(err)
-        }
+    function handleDislikePost() {
+        sadHonkSound()
+        dislikePost(postId)
+            .unwrap()
+            .then(updatedPost => {
+                setLikeTotal(updatedPost.likes.length - updatedPost.dislikes.length)
+                setUserLiked(updatedPost.likes.includes(user._id))
+                setUserDisliked(updatedPost.dislikes.includes(user._id))
+            })
+            .catch(err => console.error(err))
     }
 
     function handleUpdate() {
@@ -76,6 +83,8 @@ export default function PostShowItem({ user }) {
     return (
         <>
             <div className="post">
+                { isFetching && <div>Loading Post...</div>}
+                {error && <div>Error loading post. Please refresh page.</div>}
                 <h2>{post.title}</h2>
                 <p>{post.text}</p>
                 <div className="owner-button-container">
@@ -91,7 +100,7 @@ export default function PostShowItem({ user }) {
                 <div className="likes-container">
                     <span
                         className='like-button'
-                        onClick={likePost}
+                        onClick={handleLikePost}
                         style={{ color: userLiked && "blue" }}
                     >
                         <TbArrowBigUpFilled />
@@ -99,7 +108,7 @@ export default function PostShowItem({ user }) {
                     <span>{likeTotal}</span>
                     <span
                         className='dislike-button'
-                        onClick={dislikePost}
+                        onClick={handleDislikePost}
                         style={{ color: userDisliked && "orangered" }}
                     >
                         <TbArrowBigDownFilled />

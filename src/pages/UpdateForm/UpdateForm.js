@@ -1,10 +1,12 @@
 import { useParams, useNavigate } from "react-router-dom"
 import { useState, useEffect } from "react"
-import * as postsAPI from "../../utilities/posts-api"
+import { useLazyFetchPostQuery, useUpdatePostMutation } from "../../store/apis/postsApi"
 
 export default function UpdateForm() {
     const [title, setTitle] = useState("")
     const [text, setText] = useState("")
+    const [fetchPost] = useLazyFetchPostQuery()
+    const [updatePost] = useUpdatePostMutation()
 
     const navigate = useNavigate()
 
@@ -18,29 +20,27 @@ export default function UpdateForm() {
 
     const { postId } = useParams()
   
-    useEffect(function() {
-      async function getPost(postId) {
-        try {
-          const post = await postsAPI.show(postId)
-          setTitle(post.title)
-          setText(post.text)
-        } catch(err) {
-          console.error(err)
+    useEffect(function () {
+        async function getPost(postId) {
+            try {
+                const { data } = await fetchPost(postId)
+                setTitle(data.title)
+                setText(data.text)
+            } catch (err) {
+                console.error(err)
+            }
         }
-      }
-      getPost(postId)
-      window.scrollTo(0, 0)
-    }, [postId])
+        getPost(postId)
+        window.scrollTo(0, 0)
+    }, [postId, fetchPost])
 
-    async function handleSubmit(event) {
-        try {
-          event.preventDefault()
-          const postData = {title, text}
-          const updatedPost = await postsAPI.update(postId, postData)
-          navigate(`/view/${updatedPost._id}`)
-        } catch(err) {
-          console.error(err)
-        }
+    function handleSubmit(event) {
+        event.preventDefault()
+        const postData = { title, text }
+        updatePost({ postId, postData })
+            .unwrap()
+            .then((updatedPost) => navigate(`/view/${updatedPost._id}`))
+            .catch(err => console.error(err))
     }
 
   return (

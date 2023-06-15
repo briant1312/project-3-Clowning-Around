@@ -1,60 +1,52 @@
 import React from 'react'
-import * as commentAPI from '../../utilities/comment-api'
 import { useParams } from 'react-router-dom'
-import * as postsAPI from '../../utilities/posts-api'
 import { useState } from 'react'
-import sadhonkfile from '../../audio/sadhonk.mp3'
+import useSounds from '../../hooks/useSounds'
 import { TbArrowBigUpFilled, TbArrowBigDownFilled } from "react-icons/tb"
+import { useLikeCommentMutation, useDislikeCommentMutation, useDeleteCommentMutation } from "../../store"
 
 export default function Comment({ comment, user, setComments }) {
     const { postId } = useParams()
     const [likeTotal, setLikeTotal] = useState(comment.likes.length - comment.dislikes.length)
     const [userLiked, setUserLiked] = useState(comment.likes.includes(user._id));
     const [userDisliked, setUserDisliked] = useState(comment.dislikes.includes(user._id));
+    const { bikeHornSound, sadHonkSound } = useSounds()
+    const [likeComment] = useLikeCommentMutation()
+    const [dislikeComment] = useDislikeCommentMutation()
+    const [deleteComment] = useDeleteCommentMutation()
 
-    const honk = new Audio("http://www.bubbasmonkey.com/COWS/bikehorn.wav")
-    let sadhonk = new Audio(sadhonkfile)
-    sadhonk.playbackRate = 2
 
-    async function likeComment() {
-        try {
-            const updatedComment = await commentAPI.likeComment(postId, { id: comment._id })
-            if (!(updatedComment.likes)) {
-                return
-            }
-            setLikeTotal(updatedComment.likes.length - updatedComment.dislikes.length)
-            setUserLiked(updatedComment.likes.includes(user._id))
-            setUserDisliked(updatedComment.dislikes.includes(user._id))
-            honk.play()
-        } catch (err) {
-            console.error(err)
-        }
-
+    function handleLikeComment() {
+        bikeHornSound()
+        likeComment({ postId, commentId: comment._id })
+            .unwrap()
+            .then(updatedComment => {
+                setLikeTotal(updatedComment.likes.length - updatedComment.dislikes.length)
+                setUserLiked(updatedComment.likes.includes(user._id))
+                setUserDisliked(updatedComment.dislikes.includes(user._id))
+            })
+            .catch(err => console.error(err))
     }
 
-    async function dislikeComment() {
-        try {
-            const updatedComment = await commentAPI.dislikeComment(postId, { id: comment._id })
-            if (!(updatedComment.likes)) {
-                return
-            }
-            setLikeTotal(updatedComment.likes.length - updatedComment.dislikes.length)
-            setUserLiked(updatedComment.likes.includes(user._id))
-            setUserDisliked(updatedComment.dislikes.includes(user._id))
-            sadhonk.play()
-        } catch (err) {
-            console.error(err)
-        }
+    function handleDislikeComment() {
+        sadHonkSound()
+        dislikeComment({ postId, commentId: comment._id })
+            .unwrap()
+            .then(updatedComment => {
+                setLikeTotal(updatedComment.likes.length - updatedComment.dislikes.length)
+                setUserLiked(updatedComment.likes.includes(user._id))
+                setUserDisliked(updatedComment.dislikes.includes(user._id))
+            })
+            .catch(err => console.error(err))
     }
 
-    async function handleDelete(commentId) {
-        try {
-            await commentAPI.deleteComment(postId, { id: commentId })
-            const post = await postsAPI.show(postId)
-            setComments(post.comments)
-        } catch (err) {
-            console.error(err)
-        }
+    function handleDelete(commentId) {
+        deleteComment({ postId, commentId: comment._id })
+            .unwrap()
+            .then(comments => {
+                setComments(comments)
+            })
+            .catch(err => console.error(err))
     }
 
     return (
@@ -64,7 +56,7 @@ export default function Comment({ comment, user, setComments }) {
             <div className="likes-container">
                 <span
                     className='like-button'
-                    onClick={likeComment}
+                    onClick={handleLikeComment}
                     style={{ color: userLiked && "blue" }}
                 >
                     <TbArrowBigUpFilled />
@@ -72,7 +64,7 @@ export default function Comment({ comment, user, setComments }) {
                 <span>{likeTotal}</span>
                 <span
                     className='dislike-button'
-                    onClick={dislikeComment}
+                    onClick={handleDislikeComment}
                     style={{ color: userDisliked && "orangered" }}
                 >
                     <TbArrowBigDownFilled />

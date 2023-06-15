@@ -9,8 +9,8 @@ const commentsApi = createApi({
     endpoints(builder) {
         return {
             createComment: builder.mutation({
-                query: (postId, comment) => {
-                    const headers = setHeaders
+                query: ({ postId, comment }) => {
+                    const headers = setHeaders()
                     return {
                         url: `/${postId}`,
                         method: "POST",
@@ -20,34 +20,34 @@ const commentsApi = createApi({
                 }
             }),
             deleteComment: builder.mutation({
-                query: (postId, commentId) => {
-                    const headers = setHeaders
+                query: ({ postId, commentId }) => {
+                    const headers = setHeaders()
                     return {
                         url: `/${postId}`,
                         method: "DELETE",
-                        body: JSON.stringify(commentId),
+                        body: JSON.stringify({ id: commentId }),
                         headers
                     }
                 }
             }),
             likeComment: builder.mutation({
-                query: (postId, commentId) => {
-                    const headers = setHeaders
+                query: ({ postId, commentId }) => {
+                    const headers = setHeaders()
                     return {
                         url: `/likes/${postId}`,
                         method: "PATCH",
-                        body: JSON.stringify(commentId),
+                        body: JSON.stringify({ id: commentId }),
                         headers
                     }
                 }
             }),
             dislikeComment: builder.mutation({
-                query: (postId, commentId) => {
-                    const headers = setHeaders
+                query: ({ postId, commentId }) => {
+                    const headers = setHeaders()
                     return {
                         url: `/dislikes/${postId}`,
                         method: "PATCH",
-                        body: JSON.stringify(commentId),
+                        body: JSON.stringify({ id: commentId }),
                         headers
                     }
                 }

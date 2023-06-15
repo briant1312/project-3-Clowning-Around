@@ -1,12 +1,12 @@
 import React from 'react'
 import { useState } from 'react'
-import * as postsAPI from '../../utilities/posts-api'
 import { useNavigate } from "react-router-dom"
-
+import { useCreatePostMutation } from '../../store/apis/postsApi'
 
 export default function CreateForm({user}) {
     const [title, setTitle] = useState("")
     const [text, setText] = useState("")
+    const [createPost] = useCreatePostMutation()
     window.scrollTo(0, 0)
 
     const navigate = useNavigate()
@@ -19,15 +19,14 @@ export default function CreateForm({user}) {
         setText (event.target.value)
     }
 
-    async function handleSubmit(event) {
-        try {
-            event.preventDefault()
-            const postData = {title, text, owner: user._id}
-            await postsAPI.create(postData)
-            navigate('/')
-        } catch(err) {
-            console.error(err)
-        }
+    function handleSubmit(event) {
+        event.preventDefault()
+        if(!title || !text) return
+        const postData = { title, text, owner: user._id }
+        createPost(postData)
+            .unwrap()
+            .then(() => navigate('/'))
+            .catch(err => console.error(err))
     }
 
     return (

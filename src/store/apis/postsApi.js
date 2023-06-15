@@ -50,7 +50,7 @@ const postsApi = createApi({
                 }
             }),
             updatePost: builder.mutation({
-                query: (postId, postData) => {
+                query: ({ postId, postData }) => {
                     const headers = setHeaders()
                     return {
                         url: `/${postId}`,

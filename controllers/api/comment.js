@@ -5,11 +5,17 @@ const Comment = require('../../models/comment')
 
 function create(req, res, next){
     Post.findById(req.params.id)
-        .then((post) => {
+            .then((post) => {
             post.comments.push(req.body)
             return post.save()
         })
-        .then((post) => res.json(post)
+        .then(post => {
+            return post.populate({
+                path: "comments",
+                populate: { path: "owner" }
+            })
+        })
+        .then((post) => res.json(post.comments)
         ) .catch(next)
 }
 
@@ -17,10 +23,16 @@ function create(req, res, next){
 function deleteOne(req, res, next){
     Post.findById(req.params.id)
         .then((post) => {
-           post.comments.id(req.body.id).remove()
+            post.comments.id(req.body.id).remove()
             return post.save()
         })
-        .then(() => res.sendStatus(204)
+        .then(post => {
+            return post.populate({
+                path: "comments",
+                populate: { path: "owner" }
+            })
+        })
+        .then((post) => res.json(post.comments)
         ) .catch(next)
 }
 

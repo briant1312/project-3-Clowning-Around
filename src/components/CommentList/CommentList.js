@@ -4,7 +4,7 @@ export default function CommentList({comments, user, setComments}) {
     return (
         <div>{
             comments && comments.map((comment, index) => (
-                <Comment setComments={setComments} user={user} comment={comment} key={index} />
+                <Comment setComments={setComments} user={user} comment={comment} key={comment._id} />
             ))
         }</div>
 
