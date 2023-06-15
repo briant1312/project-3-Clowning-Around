@@ -29,11 +29,11 @@ export {
 export {
     useLazyFetchAllPostsQuery,
     useLazyFetchPostQuery,
-    useLazyCreatePostMutation,
-    useLazyDeletePostMutation,
-    useLazyUpdatePostMutation,
-    useLazyLikePostMutation,
-    useLazyDislikePostMutation
+    useCreatePostMutation,
+    useDeletePostMutation,
+    useUpdatePostMutation,
+    useLikePostMutation,
+    useDislikePostMutation
 } from "./apis/postsApi"
 
 export {

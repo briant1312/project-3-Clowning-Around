@@ -1,43 +1,44 @@
-import * as postsAPI from '../../utilities/posts-api'
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
-import sadhonkfile from '../../audio/sadhonk.mp3'
 import { TbArrowBigUpFilled, TbArrowBigDownFilled } from "react-icons/tb"
+import { useLikePostMutation, useDislikePostMutation } from '../../store'
+import useSounds from "../../hooks/useSounds"
 
 export default function PostItem({ post, user }) {
     const [likeTotal, setLikeTotal] = useState(post.likes.length - post.dislikes.length)
     const [userLiked, setUserLiked] = useState(post.likes.includes(user._id));
     const [userDisliked, setUserDisliked] = useState(post.dislikes.includes(user._id));
+    const { bikeHornSound, sadHonkSound } = useSounds()
 
-    let sadhonk = new Audio(sadhonkfile)
-    sadhonk.playbackRate = 2
-    const honk = new Audio("http://www.bubbasmonkey.com/COWS/bikehorn.wav")
+    const [ likePost ] = useLikePostMutation()
+    const [ dislikePost ] = useDislikePostMutation()
+
     const navigate = useNavigate()
 
-    async function likePost(event) {
-        try {
-            event.stopPropagation()
-            const updatedPost = await postsAPI.likePost(post._id)
-            setLikeTotal(updatedPost.likes.length - updatedPost.dislikes.length)
-            setUserLiked(updatedPost.likes.includes(user._id))
-            setUserDisliked(updatedPost.dislikes.includes(user._id))
-            honk.play()
-        } catch(err) {
-            console.error(err)
-        }
+    function handleLikePost(event) {
+        event.stopPropagation()
+        bikeHornSound()
+        likePost(post._id)
+            .unwrap()
+            .then(updatedPost => {
+                setLikeTotal(updatedPost.likes.length - updatedPost.dislikes.length)
+                setUserLiked(updatedPost.likes.includes(user._id))
+                setUserDisliked(updatedPost.dislikes.includes(user._id))
+            })
+            .catch(err => console.error(err))
     }
 
-    async function dislikePost(event) {
-        try {
-            event.stopPropagation()
-            const updatedPost = await postsAPI.dislikePost(post._id)
-            setLikeTotal(updatedPost.likes.length - updatedPost.dislikes.length)
-            setUserDisliked(updatedPost.dislikes.includes(user._id))
-            setUserLiked(updatedPost.likes.includes(user._id))
-            sadhonk.play()
-        } catch(err) {
-            console.error(err)
-        }
+    function handleDislikePost(event) {
+        event.stopPropagation()
+        sadHonkSound()
+        dislikePost(post._id)
+            .unwrap()
+            .then(updatedPost => {
+                setLikeTotal(updatedPost.likes.length - updatedPost.dislikes.length)
+                setUserDisliked(updatedPost.dislikes.includes(user._id))
+                setUserLiked(updatedPost.likes.includes(user._id))
+            })
+            .catch(err => console.error(err))
     }
 
     function navigateToShow() {
@@ -51,7 +52,7 @@ export default function PostItem({ post, user }) {
             <div className="likes-container">
                 <span
                     className="like-button"
-                    onClick={likePost}
+                    onClick={handleLikePost}
                     style={{ color: userLiked && "blue" }}
                 >
                     <TbArrowBigUpFilled />
@@ -59,7 +60,7 @@ export default function PostItem({ post, user }) {
                 <span>{likeTotal}</span>
                 <span 
                     className="dislike-button" 
-                    onClick={dislikePost}
+                    onClick={handleDislikePost}
                     style={{ color: userDisliked && "orangered" }}
                 >
                     <TbArrowBigDownFilled />

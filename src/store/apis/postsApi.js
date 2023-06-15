@@ -87,11 +87,11 @@ const postsApi = createApi({
 export const {
     useLazyFetchAllPostsQuery,
     useLazyFetchPostQuery,
-    useLazyCreatePostMutation,
-    useLazyDeletePostMutation,
-    useLazyUpdatePostMutation,
-    useLazyLikePostMutation,
-    useLazyDislikePostMutation
+    useCreatePostMutation,
+    useDeletePostMutation,
+    useUpdatePostMutation,
+    useLikePostMutation,
+    useDislikePostMutation
 } = postsApi;
 
 export { postsApi }

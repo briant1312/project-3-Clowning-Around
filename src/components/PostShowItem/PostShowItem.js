@@ -2,10 +2,10 @@ import * as postsAPI from '../../utilities/posts-api'
 import { useNavigate } from 'react-router-dom'
 import CommentList from '../../components/CommentList/CommentList'
 import CommentInput from '../../components/CommentInput/CommentInput'
-import sadhonkfile from '../../audio/sadhonk.mp3'
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { TbArrowBigUpFilled, TbArrowBigDownFilled } from "react-icons/tb"
+import useSounds from '../../hooks/useSounds'
 
 export default function PostShowItem({ user }) {
     const [post, setPost] = useState({})
@@ -13,6 +13,7 @@ export default function PostShowItem({ user }) {
     const [likeTotal, setLikeTotal] = useState(0)
     const [userLiked, setUserLiked] = useState(false);
     const [userDisliked, setUserDisliked] = useState(false);
+    const { bikeHornSound, sadHonkSound } = useSounds()
 
     const { postId } = useParams()
 
@@ -33,10 +34,6 @@ export default function PostShowItem({ user }) {
         window.scrollTo(0, 0)
     }, [postId, user])
 
-    const honk = new Audio("http://www.bubbasmonkey.com/COWS/bikehorn.wav")
-    let sadhonk = new Audio(sadhonkfile)
-    sadhonk.playbackRate = 2
-
     const navigate = useNavigate()
 
     async function handleDelete() {
@@ -54,7 +51,7 @@ export default function PostShowItem({ user }) {
             setLikeTotal(updatedPost.likes.length - updatedPost.dislikes.length)
             setUserLiked(updatedPost.likes.includes(user._id))
             setUserDisliked(updatedPost.dislikes.includes(user._id))
-            honk.play()
+            bikeHornSound()
         } catch (err) {
             console.error(err)
         }
@@ -66,7 +63,7 @@ export default function PostShowItem({ user }) {
             setLikeTotal(updatedPost.likes.length - updatedPost.dislikes.length)
             setUserLiked(updatedPost.likes.includes(user._id))
             setUserDisliked(updatedPost.dislikes.includes(user._id))
-            sadhonk.play()
+            sadHonkSound()
         } catch (err) {
             console.error(err)
         }
