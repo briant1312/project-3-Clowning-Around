@@ -13,7 +13,7 @@ const app = express()
 // comes from .env file or use 3001
 const PORT = process.env.PORT || 3001
 
-app.use(logger('dev'))
+app.use(logger('short'))
 app.use(express.json())
 app.use(cors({ origin: process.env.CLIENT_ORIGIN || `http://localhost:3000` }))
 
